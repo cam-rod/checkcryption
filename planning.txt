@@ -1,0 +1,5 @@
+Necessary Files
+
+[] keystorage.txt
+[] Textcryption.py (User Interface)
+[] crypter.py (Encyption/Decryption)
