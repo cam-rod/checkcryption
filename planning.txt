@@ -1,5 +1,12 @@
 Necessary Files
 
-[] keystorage.txt
-[] Textcryption.py (User Interface)
+[] userdata.txt (Usernames and passswords are stored here)
+[] Textcryption.py (Main Program, calls everything else and cycles options)
+
 [] crypter.py (Encyption/Decryption)
+[] accounts.py (Usernames/passwords as objects, signin, save to userdata.txt)
+
+TIPS:
+- To regenerate the objects for each user, the code to create them must be run at import time. The best way to
+do this is by returning all objects in a list.
+- Use return without arguments to end a function quickly
