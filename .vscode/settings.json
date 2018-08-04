@@ -1,0 +1,8 @@
+{
+  "cSpell.words": [
+    "crypter"
+  ],
+  "python.linting.pylintArgs": [
+    "--disable=C0301"
+],
+}
