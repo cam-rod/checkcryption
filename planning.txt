@@ -5,6 +5,7 @@ Necessary Files
 
 [] crypter.py (Encyption/Decryption only, using password)
 [] accounts.py (Usernames/encrypted usernames stores as objects, signin/create account with unencrypted username)
+  - Passwords are also stored here during use, in a hashed form
 [] text-parser.py (Reads and writes data, both for plaintext and files used by crypt.py and accounts.py)
 
 TIPS:
