@@ -4,11 +4,17 @@ Necessary Files
 [] Textcryption.py (Main Program, calls everything else and cycles options)
 
 [] crypter.py (Encyption/Decryption only, using password)
-[] accounts.py (Usernames/encrypted usernames stores as objects, signin/create account)
-[] text-parser.py (Reads and writes data, used by crypt.py and accounts.py)
+[] accounts.py (Usernames/encrypted usernames stores as objects, signin/create account with unencrypted username)
+[] text-parser.py (Reads and writes data, both for plaintext and files used by crypt.py and accounts.py)
 
 TIPS:
-- To regenerate the objects for each user, the code to create them must be run at import time. The best way to
-do this is by returning all objects in a list.
-- Use return without arguments to end a function quickly
-- Don't forget to delete the plaintext password and the encryption key as soon as it isn't needed.
+  - To regenerate the objects for each user, the code to create them must be run at import time. The best way to
+  do this is by returning all objects in a list.
+  - Use return without arguments to end a function quickly
+  - Don't forget to delete the plaintext password and the encryption key as soon as it isn't needed.
+
+Username requirements: None
+
+Password requirements:
+  - EXACTLY 8 characters
+  - Alphanumeric()[]!@#,.*/
