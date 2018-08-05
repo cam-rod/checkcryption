@@ -22,11 +22,15 @@ class Crypter:
     self.crypt = crypt
   
   @property
-  def encryption_key(self): # Stored as property to allow other areas to allow encryter decryptor to call key
+  def encryption_key(self): # Stored as property to allow other areas to allow encrypter/decrypter to call key
     return self._encryption_key
   
   @encryption_key.setter
   def encryption_key(self, password):
     "This function generates the encryption key."
     if self.password != None:
-      for i in self.password: # Each character of the password
+      fragments = [] # Individual characters in encryption key
+      for i in self.password[0:4]
+        ]: # Each character of the password
+        if i == ('N' or 'r' or '(' or 'D' or 'c' or '.' or 'V'):
+          fragments.append('0')
