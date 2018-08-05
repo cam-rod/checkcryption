@@ -31,7 +31,7 @@ class Crypter:
     if self.password != None:
       fragments = [] # Individual numbers in encryption key
       print("Generating encryption key...")
-      for i in self.password[0:4]: # Each character of the password
+      for i in self.password[0:4]: # 1st-4th characters of the password
         if i == ('N' or 'r' or '(' or 'D' or 'c' or '.' or 'V'):
           fragments.append(0)
         elif i == ('Q' or 'n' or 'J' or 'e' or 'Z' or 'a' or 'k'):
@@ -52,24 +52,24 @@ class Crypter:
           fragments.append(8)
         else:
           fragments.append(9)
-      for i in self.password[4:8]: # Each character of the password
-        if i == ():
+      for i in self.password[4:8]: # 5th-8th characters of the password
+        if i == ('A' or 'i' or 'y' or '5' or 'o' or 'X' or 't'):
           fragments.append(0)
-        elif i == ():
+        elif i == ('.' or 'c' or 'e' or 'D' or 'k' or 'U' or 'Q' or '1'):
           fragments.append(1)
-        elif i == ():
+        elif i == ('H' or 'v' or 'a' or 'N' or 'x' or 'J' or '@'):
           fragments.append(2)
-        elif i == ():
+        elif i == ('q' or 'B' or ']' or 'g' or '*' or 'L' or '6'):
           fragments.append(3)
-        elif i == ():
+        elif i == ('G' or 's' or '0' or 'Z' or 'O' or 'd' or 'b' or 'p'):
           fragments.append(4)
-        elif i == ():
+        elif i == ('l' or 'w' or ',' or '9' or '2' or 'n' or 'M'):
           fragments.append(5)
-        elif i == ():
+        elif i == ('E' or 'T' or 'f' or '/' or 'z' or '7' or '(' or 'I'):
           fragments.append(6)
-        elif i == ():
+        elif i == ('u' or 'C' or 'F' or 'S' or 'P' or 'Y' or 'h'):
           fragments.append(7)
-        elif i == ():
+        elif i == ('3' or 'R' or '#' or '!' or '8' or 'K' or 'm'):
           fragments.append(8)
         else:
           fragments.append(9)
