@@ -73,3 +73,24 @@ class Crypter:
           fragments.append(8)
         else:
           fragments.append(9)
+      for i in self.password[8:12]: # 9th-12th characters of the password
+        if i == ('F' or 'w' or '9' or '@' or '#' or 'o' or 'S'):
+          fragments.append(0)
+        elif i == ('P' or '4' or 'h' or 'X' or 'q' or 'a' or 'J'):
+          fragments.append(1)
+        elif i == (']' or 'C' or 'g' or 'H' or 'z' or 'B' or 'R'):
+          fragments.append(2)
+        elif i == ('7' or ',' or 'e' or 'Q' or 't' or 'L' or 'm'):
+          fragments.append(3)
+        elif i == ('D' or 'p' or '1' or 'U' or '8' or '3' or '('):
+          fragments.append(4)
+        elif i == ('c' or 's' or 'f' or 'T' or '.' or 'k' or 'Z' or 'i'):
+          fragments.append(5)
+        elif i == ('M' or 'Y' or 'n' or '5' or '/' or 'v' or 'W'):
+          fragments.append(6)
+        elif i == ('K' or 'y' or '!' or 'N' or 'G' or 'u' or '0' or 'V'):
+          fragments.append(7)
+        elif i == ('O' or '[' or ')' or 'I' or 'l' or 'b' or 'E'):
+          fragments.append(8)
+        else:
+          fragments.append(9)
