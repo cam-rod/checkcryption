@@ -3,7 +3,7 @@ Necessary Files
 [] users.txt (Usernames and encrypted usernames are stored here)
 [] Textcryption.py (Main Program, calls everything else and cycles options)
 
-[] crypter.py (Encyption/Decryption only, using password)
+[] crypter.py (Encyption/Decryption only, using password. Class is used to allow for property, quick delete) 
 [] accounts.py (Usernames/encrypted usernames stores as objects, signin/create account with unencrypted username)
   - Passwords are also stored here during use, in a hashed form
 [] text-parser.py (Reads and writes data, both for plaintext and files used by crypt.py and accounts.py)
