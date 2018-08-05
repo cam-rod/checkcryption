@@ -1,7 +1,9 @@
 {
   "cSpell.words": [
-    "crypter"
+    "crypter",
+    "textcryption"
   ],
+  "python.linting.enabled": false,
   "python.linting.pylintArgs": [
     "--disable=C0301"
 ],
