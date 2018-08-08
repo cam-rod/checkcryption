@@ -21,9 +21,11 @@ TIPS:
   - Don't forget to delete the plaintext password and the encryption key as soon as it isn't needed.
   - Use .insert(where, what) to salt
 
+  - use ' '.join("{:08b}".format(ord(x), 'b') for x in TEXT) to convert text to binary
+
 Username requirements: None
 
 Password requirements:
   - EXACTLY 12 characters
   - Alphanumeric()[]!@#,.*/ (73 possibilities)
-  - At least one capital letter, one number, one symbol
+  - At least one capital & one lowercase letter, one number, one symbol
