@@ -8,7 +8,6 @@ class Crypter:
   Arguments:
     - password: hashed (scrambled) version of the password, used to generate the encryption key
     - text: in the form of plaintext (to be encrypted) or encrypted data (to be decrypted), depending on what is requested
-    - crypt: what should happen to the text (encryption or decryption)
 
   Other variables:
     - encryption_key: the key which directly instructs the program how to encrypt the data (hashed and salted)
@@ -17,20 +16,19 @@ class Crypter:
     - the encrypted (after encryption) or plaintext data (after decryption)
   """
 
-  def __init__(self, password, text, crypt):
+  def __init__(self, password, text):
     """Initializes the variables."""
     self.password = password
     self.text = text
-    self.crypt = crypt
   
   @property
   def encryption_key(self): # Stored as property to allow other areas to allow encrypter/decrypter to call key
     return self._encryption_key
   
   @encryption_key.setter
-  def encryption_key(self, password):
+  def encryption_key(self, value):
     "This function generates the encryption key."
-    if password != None:
+    if value:
       e = [] # Individual numbers in encryption key
       salt = [] # Salted numbers to be added to e
       print("Generating encryption key...")
@@ -168,3 +166,14 @@ class Crypter:
       self._encryption_key = ''.join(e) # The encryption key
       del e
       del salt
+      del password
+    else:
+      pass # Request denied by program
+
+  def encrypter(self):
+    """This encrypts the text."""
+    pass
+
+  def decrypter(self):
+    """This decrypts the text."""
+    pass
