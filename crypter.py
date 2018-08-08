@@ -20,9 +20,6 @@ class Crypter:
     self.password = password
     self.text = text
   
-  @classmethod
-  
-
   @property
   def encryption_key(self): # Stored as property to allow other areas to allow encrypter/decrypter to call key
     return self._encryption_key
