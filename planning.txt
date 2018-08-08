@@ -3,10 +3,16 @@ Necessary Files
 [] users.txt (Usernames and encrypted usernames are stored here)
 [] Textcryption.py (Main Program, calls everything else and cycles options)
 
-[] crypter.py (Encryption/Decryption only, using password. Class is used to allow for property, quick delete) 
+[x] crypter.py (Encryption/Decryption only, using password. Class is used to allow for property, quick delete) 
 [] accounts.py (Usernames/encrypted usernames stores as objects, signin/create account with unencrypted username)
   - Passwords are also stored here during use, in a hashed form
 [] text-parser.py (Reads and writes data, both for plaintext and files used by crypt.py and accounts.py)
+  - Input and verify password
+  - Read files for crypting
+  - Read plaintext for crypting
+  - Write to crypted file (old or new)
+  - Read from users.txt
+  - Write to users.txt
 
 TIPS:
   - To regenerate the objects for each user, the code to create them must be run at import time. The best way to
