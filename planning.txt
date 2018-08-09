@@ -3,7 +3,9 @@ Necessary Files
 [] users.txt (Usernames and encrypted usernames are stored here)
 [] textcryption.py (Main Program, calls everything else and cycles options)
 
-[x] crypter.py (Encryption/Decryption only, using password. Class is used to allow for property, quick delete)
+[] crypter.py (Encryption/Decryption only, using password. Class is used to allow for property, quick delete)
+    [x] Key Generation
+    [] Encrypter/Decrypter
 [] text_parser.py (Reads and writes data, both for plaintext and files used by crypter.py)
     - Input and verify password
     - Read files for crypting
@@ -11,7 +13,7 @@ Necessary Files
     - Write to crypted file (old or new)
     - Read from users.txt
     - Write to users.txt
-[] accounts.py (Sign-in and creates accounts)
+[x] accounts.py (Sign-in and creates accounts)
 
 TIPS:
     - Use semicolons to separate unencrypted usernames from encrypted usernames
