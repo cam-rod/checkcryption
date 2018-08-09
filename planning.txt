@@ -11,6 +11,7 @@ Necessary Files
   - Write to crypted file (old or new)
   - Read from users.txt
   - Write to users.txt
+[] accounts.py (Sign-in and creates accounts)
 
 TIPS:
   - Use semicolons to separate unencrypted usernames from encrypted usernames
