@@ -1,14 +1,14 @@
 {
-  "cSpell.words": [
-    "cfsp",
-    "crypted",
-    "crypter",
-    "crypting",
-    "odbp",
-    "textcryption"
-  ],
-  "python.linting.enabled": false,
-  "python.linting.pylintArgs": [
-    "--disable=C0301"
-],
+    "cSpell.words": [
+        "cfsp",
+        "crypted",
+        "crypter",
+        "crypting",
+        "odbp",
+        "textcryption"
+    ],
+    "python.linting.enabled": false,
+    "python.linting.pylintArgs": [
+        "--disable=C0301"
+    ],
 }
