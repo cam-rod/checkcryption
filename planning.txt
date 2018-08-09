@@ -1,7 +1,7 @@
 Necessary Files
 
 [] users.txt (Usernames and encrypted usernames are stored here)
-[] Textcryption.py (Main Program, calls everything else and cycles options)
+[] textcryption.py (Main Program, calls everything else and cycles options)
 
 [x] crypter.py (Encryption/Decryption only, using password. Class is used to allow for property, quick delete)
 [] text-parser.py (Reads and writes data, both for plaintext and files used by crypter.py)
@@ -27,3 +27,18 @@ Password requirements:
   - EXACTLY 12 characters
   - Alphanumeric()[]!@#,.*/ (73 possibilities)
   - At least one capital & one lowercase letter, one number, one symbol
+
+Functions of accounts.py:
+  - main()
+    * This main-loop program asks what the user wants to do.
+    * create_account() results in a loop, signin() breaks out.
+  - user_entry()
+    * This function gets the username and password (using text-parser.password_entry()).
+    * The username will be encrypted and returned using crypter.encrypter().
+    * The password and both usernames are returned in a dictionary.
+  - create_account()
+    * This function will call user_entry().
+    * The unencrypted and encrypted username will be stored in users.txt.
+  - signin()
+    * This function will call user_entry().
+    * It will compare both to the entries in users.txt and return the confirmation to textcryption.py.

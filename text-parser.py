@@ -8,7 +8,7 @@ Functions:
   - Writes usernames to users.txt."""
 
 def password_entry():
-  """This function is called by accounts.signin() or accounts.new_account() to get the password.
+  """This function is called by accounts.user_entry() to get the password.
   
   It requests a password, checks to see if the password is valid, and if so returns the password."""
   pass
