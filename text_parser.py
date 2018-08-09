@@ -14,7 +14,9 @@ def password_entry():
     pass
 
 def read_users():
+    print('Retriving user data...')
     pass
 
-def write_users():
+def write_users(user, e_user):
+    print('Saving account details...')
     pass

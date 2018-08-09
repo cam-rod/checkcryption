@@ -166,6 +166,7 @@ class Crypter:
             del e
             del salt
             del password
+            print('Encryption key generated!')
         else:
             pass # Request denied by program
 
