@@ -36,6 +36,7 @@ Functions of accounts.py:
         * This function gets the username and password (using text-parser.password_entry()).
         * The username will be encrypted and returned using crypter.encrypter().
         * The password and both usernames are returned in a dictionary.
+    ========================================THIS IS NOW PART OF MAIN()======================================
     - create_account()
         * This function will call user_entry().
         * The unencrypted and encrypted username will be stored in users.txt.

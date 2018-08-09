@@ -4,15 +4,12 @@ Arguments: None
 
 Functions:
     - main loop for what the user wants to do.
+        - creates an account and adds usernames to users.txt.
+        - signs in using data from users.txt.
     - requests and returns the entered username, encrypted username, and password.
-    - creates an account and adds usernames the users.txt.
-    - signs in using data from users.txt."""
+"""
 from text_parser import password_entry, read_users, write_users
 from crypter import Crypter
-
-def main():
-    """This is the main process thee determines whether to sign in or to create an account."""
-    pass
 
 def user_entry():
     """This function requests the username and password from the user and returns them and the encrypted username."""
@@ -27,3 +24,7 @@ def user_entry():
 
     del en_user
     return data # Both usernames and the password
+
+def main():
+    """This is the main process thee determines whether to sign in or to create an account, and does such."""
+    pass
