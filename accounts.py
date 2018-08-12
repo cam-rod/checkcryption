@@ -20,7 +20,7 @@ def user_entry():
 
     en_user = Crypter(data['pass'], data['user']) # Crypter object to create encrypted username
     en_user.encryption_key = True # Generate encryption key
-    data['e_user'] = en_user.encrypter # Encrypt the username
+    data['e_user'] = en_user.encrypter() # Encrypt the username
 
     del en_user
     return data # Both usernames and the password
