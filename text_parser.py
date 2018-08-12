@@ -45,7 +45,7 @@ def read_users(username):
     print('Retriving user data...')
     saved_data = {}
     while True:
-        with open('users.txt') as file:
+        with open('users.txt', 'r+') as file:
             file_text = file.read() # get saved data
             located_data = re.search(username, file_text) # find the username
             try:
@@ -62,4 +62,19 @@ def read_users(username):
 
 def write_users(user, e_user):
     print('Saving account details...')
-    pass
+    successful = False
+    while True:
+        with open('users.txt', 'a+') as file:
+            file.seek(0,0) # Go to start of file
+            list_all = file.read()
+            if re.search(user, list_all): # username is already taken
+                break # failed setup
+            else:
+                file.seek(0,2)
+                f.write('{};{};\n'.format(user, e_user)) # write usernames to a new line
+                successful = True
+                break
+    
+    del file
+    del list_all
+    return successful
