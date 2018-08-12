@@ -49,9 +49,13 @@ def main():
             print('\nSign in here.')
             data = user_entry() # Get username and password
             print('\nSigning in...')
-            saved = read_users()
+            saved = read_users(data['user'])
 
             print('Verifying...')
+            if saved == None: # No such username found
+                del data
+                del saved
+                print('No such username found. Please try again or create an account.')
             if (data['user'] == saved['user']) && (data['e_user'] == saved['e_user']): # Correct password entered
                 password = data['pass']
                 del data
