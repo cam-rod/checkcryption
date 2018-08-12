@@ -32,65 +32,65 @@ class Crypter:
             salt = [] # Salted numbers to be added to e
             print("Generating encryption key...")
             for i in self.password[0:4]: # 1st-4th characters of the password
-                if re.match(r'[Nr\(Dc\.V]', i) != None:
+                if re.match(r'[Nr\(Dc\.V]', i):
                     e.append(0)
-                elif re.match(r'[QnJeZak]', i) != None:
+                elif re.match(r'[QnJeZak]', i):
                     e.append(1)
-                elif re.match(r'[i7\*zHuy]', i) != None:
+                elif re.match(r'[i7\*zHuy]', i):
                     e.append(2)
-                elif re.match(r'[SF\[jhR3x]', i) != None:
+                elif re.match(r'[SF\[jhR3x]', i):
                     e.append(3)
-                elif re.match(r'[pYo#5wU]', i) != None:
+                elif re.match(r'[pYo#5wU]', i):
                     e.append(4)
-                elif re.match(r'[bT0gKA2]', i) != None:
+                elif re.match(r'[bT0gKA2]', i):
                     e.append(5)
-                elif re.match(r'[@XvI8s1]', i) != None:
+                elif re.match(r'[@XvI8s1]', i):
                     e.append(6)
-                elif re.match(r'[\)OdlLqC]', i) != None:
+                elif re.match(r'[\)OdlLqC]', i):
                     e.append(7)
-                elif re.match(r'[/,W4tPB9]', i) != None:
+                elif re.match(r'[/,W4tPB9]', i):
                     e.append(8)
                 else:
                     e.append(9)
             for i in self.password[4:8]: # 5th-8th characters of the password
-                if re.match(r'[Aiy5oXt]', i) != None:
+                if re.match(r'[Aiy5oXt]', i):
                     e.append(0)
-                elif re.match(r'[\.ceDkUQ1]', i) != None:
+                elif re.match(r'[\.ceDkUQ1]', i):
                     e.append(1)
-                elif re.match(r'[HvaNxJ@]', i) != None:
+                elif re.match(r'[HvaNxJ@]', i):
                     e.append(2)
-                elif re.match(r'[qB\]g\*L6]', i) != None:
+                elif re.match(r'[qB\]g\*L6]', i):
                     e.append(3)
-                elif re.match(r'[Gs0ZOdbp]', i) != None:
+                elif re.match(r'[Gs0ZOdbp]', i):
                     e.append(4)
-                elif re.match(r'[lw,92nM]', i) != None:
+                elif re.match(r'[lw,92nM]', i):
                     e.append(5)
-                elif re.match(r'[ETf/z7\(I]', i) != None:
+                elif re.match(r'[ETf/z7\(I]', i):
                     e.append(6)
-                elif re.match(r'[uCFSPYh]', i) != None:
+                elif re.match(r'[uCFSPYh]', i):
                     e.append(7)
-                elif re.match(r'[3R#!8Km]', i) != None:
+                elif re.match(r'[3R#!8Km]', i):
                     e.append(8)
                 else:
                     e.append(9)
             for i in self.password[8:12]: # 9th-12th characters of the password
-                if re.match(r'[Fw9@#oS]', i) != None:
+                if re.match(r'[Fw9@#oS]', i):
                     e.append(0)
-                elif re.match(r'[P4hXqaJ]', i) != None:
+                elif re.match(r'[P4hXqaJ]', i):
                     e.append(1)
-                elif re.match(r'[\]CgHzBR]', i) != None:
+                elif re.match(r'[\]CgHzBR]', i):
                     e.append(2)
-                elif re.match(r'[7,eQtLm]', i) != None:
+                elif re.match(r'[7,eQtLm]', i):
                     e.append(3)
-                elif re.match(r'[Dp1U83\(]', i) != None:
+                elif re.match(r'[Dp1U83\(]', i):
                     e.append(4)
-                elif re.match(r'[csfT\.kZi]', i) != None:
+                elif re.match(r'[csfT\.kZi]', i):
                     e.append(5)
-                elif re.match(r'[MYn5/vW]', i) != None:
+                elif re.match(r'[MYn5/vW]', i):
                     e.append(6)
-                elif re.match(r'[Ky!NGu0V]', i) != None:
+                elif re.match(r'[Ky!NGu0V]', i):
                     e.append(7)
-                elif re.match(r'[O\[\)IlbE]', i) != None:
+                elif re.match(r'[O\[\)IlbE]', i):
                     e.append(8)
                 else:
                     e.append(9)
