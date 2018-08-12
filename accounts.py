@@ -40,11 +40,18 @@ def main():
             print('\nCreate your account here.')
             data = user_entry() # Get username and password
             print('\nCreating account...')
-            write_users(data['user'], data['e_user']) # Write account details to users.txt
+            successful = write_users(data['user'], data['e_user']) # Write account details to users.txt
 
-            del data
-            print('Account created! Please sign in to continue.')
-            continue
+            if successful:
+                del data
+                del successful
+                print('Account created! Please sign in to continue.')
+                continue
+            else:
+                del data
+                del successful
+                print('This username already exists. Please try another one.')
+                continue
         else: # Sign in
             print('\nSign in here.')
             data = user_entry() # Get username and password
@@ -52,7 +59,7 @@ def main():
             saved = read_users(data['user'])
 
             print('Verifying...')
-            if saved == None: # No such username found
+            if saved == {}: # No such username found
                 del data
                 del saved
                 print('No such username found. Please try again or create an account.')
