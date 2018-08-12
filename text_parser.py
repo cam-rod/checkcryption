@@ -22,7 +22,21 @@ def password_entry():
         print('    one number, and one symbol.\n')
         password = input('Please enter your password: ')
 
-        pass
+        if len(password) == 12:
+            if re.search(r'^[A-Za-z0-9()[\]!@#,.*/]*$', password): # only valid characters used
+                if (re.search(r'[A-Z]', password) and re.search(r'[a-z]', password) and re.search(r'[0-9]', passsword)
+                and re.search(r'[()[\]!@#,.*/]', password)): # minimum character requirements
+                    break
+                else:
+                    print('That is not a valid password. Reason: password did not meet minimum requirements.')
+                    continue
+            else:
+                print('That is not a valid password. Reason: invalid characters used in password.')
+                continue
+        else:
+            print('That is not a valid password. Reason: password was not 12 characters long.')
+            continue
+    return password
 
 def read_users():
     print('Retriving user data...')
