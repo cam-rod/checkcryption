@@ -39,7 +39,9 @@ def password_entry():
     return password
 
 def read_users(username):
-    """This function checks if a username is found in users.txt and returns it if so."""
+    """This function checks if a username is found in users.txt and returns it if so.
+    
+    The returned data is in the form of a dictionary containing \'user\' and \'e_user\'."""
     print('Retriving user data...')
     saved_data = {}
     while True:
@@ -47,10 +49,15 @@ def read_users(username):
             file_text = file.read() # get saved data
             located_data = re.search(username, file_text) # find the username
             try:
-                
+                saved_data['user'] = file_text[located_data.start():located_data.end()] # Within the calculated span
+                saved_data['e_user'] = file_text[(located_data.end())+1:(re.search(';',file_text[located_data.end()+1:]))]
+                # From 1 char after user (semicolon) to the following semicolon
+                break
             except:
                 break
     
+    del file_text
+    del located_data
     return saved_data
 
 def write_users(user, e_user):
