@@ -38,9 +38,20 @@ def password_entry():
             continue
     return password
 
-def read_users():
+def read_users(username):
+    """This function checks if a username is found in users.txt and returns it if so."""
     print('Retriving user data...')
-    pass
+    saved_data = {}
+    while True:
+        with open('users.txt') as file:
+            file_text = file.read() # get saved data
+            located_data = re.search(username, file_text) # find the username
+            try:
+                
+            except:
+                break
+    
+    return saved_data
 
 def write_users(user, e_user):
     print('Saving account details...')
