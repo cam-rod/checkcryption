@@ -19,153 +19,149 @@ class Crypter:
         """Initializes the variables."""
         self.password = password
         self.text = text
-  
+        self._encryption_key = None
     @property
     def encryption_key(self): # Stored as property to allow other areas to allow encrypter/decrypter to call key
+        """Returns the encryption key."""
         return self._encryption_key
-  
     @encryption_key.setter
     def encryption_key(self, value):
-        "This function generates the encryption key."
+        """This function generates the encryption key."""
         if value:
-            e = [] # Individual numbers in encryption key
+            nums = [] # Individual numbers in encryption key
             salt = [] # Salted numbers to be added to e
             print("Generating encryption key...")
             for i in self.password[0:4]: # 1st-4th characters of the password
                 if re.match(r'[Nr(Dc.V]', i):
-                    e.append(0)
+                    nums.append(0)
                 elif re.match(r'[QnJeZak]', i):
-                    e.append(1)
+                    nums.append(1)
                 elif re.match(r'[i7*zHuy]', i):
-                    e.append(2)
+                    nums.append(2)
                 elif re.match(r'[SF[jhR3x]', i):
-                    e.append(3)
+                    nums.append(3)
                 elif re.match(r'[pYo#5wU]', i):
-                    e.append(4)
+                    nums.append(4)
                 elif re.match(r'[bT0gKA2]', i):
-                    e.append(5)
+                    nums.append(5)
                 elif re.match(r'[@XvI8s1]', i):
-                    e.append(6)
+                    nums.append(6)
                 elif re.match(r'[)OdlLqC]', i):
-                    e.append(7)
+                    nums.append(7)
                 elif re.match(r'[/,W4tPB9]', i):
-                    e.append(8)
+                    nums.append(8)
                 else:
-                    e.append(9)
+                    nums.append(9)
             for i in self.password[4:8]: # 5th-8th characters of the password
                 if re.match(r'[Aiy5oXt]', i):
-                    e.append(0)
+                    nums.append(0)
                 elif re.match(r'[.ceDkUQ1]', i):
-                    e.append(1)
+                    nums.append(1)
                 elif re.match(r'[HvaNxJ@]', i):
-                    e.append(2)
+                    nums.append(2)
                 elif re.match(r'[qB\]g*L6]', i):
-                    e.append(3)
+                    nums.append(3)
                 elif re.match(r'[Gs0ZOdbp]', i):
-                    e.append(4)
+                    nums.append(4)
                 elif re.match(r'[lw,92nM]', i):
-                    e.append(5)
+                    nums.append(5)
                 elif re.match(r'[ETf/z7(I]', i):
-                    e.append(6)
+                    nums.append(6)
                 elif re.match(r'[uCFSPYh]', i):
-                    e.append(7)
+                    nums.append(7)
                 elif re.match(r'[3R#!8Km]', i):
-                    e.append(8)
+                    nums.append(8)
                 else:
-                    e.append(9)
+                    nums.append(9)
             for i in self.password[8:12]: # 9th-12th characters of the password
                 if re.match(r'[Fw9@#oS]', i):
-                    e.append(0)
+                    nums.append(0)
                 elif re.match(r'[P4hXqaJ]', i):
-                    e.append(1)
+                    nums.append(1)
                 elif re.match(r'[]CgHzBR]', i):
-                    e.append(2)
+                    nums.append(2)
                 elif re.match(r'[7,eQtLm]', i):
-                    e.append(3)
+                    nums.append(3)
                 elif re.match(r'[Dp1U83(]', i):
-                    e.append(4)
+                    nums.append(4)
                 elif re.match(r'[csfT.kZi]', i):
-                    e.append(5)
+                    nums.append(5)
                 elif re.match(r'[MYn5/vW]', i):
-                    e.append(6)
+                    nums.append(6)
                 elif re.match(r'[Ky!NGu0V]', i):
-                    e.append(7)
+                    nums.append(7)
                 elif re.match(r'[O[)IlbE]', i):
-                    e.append(8)
+                    nums.append(8)
                 else:
-                    e.append(9)
+                    nums.append(9)
 
             # Begin salting, first quartet
-            if (e[3] - e[1]) < (e[2] + e[0]):
-                if e[2] > e[3]:
-                    if (e[0] + e[1] + e[2] + e[3]) >= 12:
+            if (nums[3] - nums[1]) < (nums[2] + nums[0]):
+                if nums[2] > nums[3]:
+                    if (nums[0] + nums[1] + nums[2] + nums[3]) >= 12:
                         salt.append(0)
                     else:
                         salt.append(6)
-                elif e[1] == 4:
+                elif nums[1] == 4:
                     salt.append(7)
                 else:
                     salt.append(1)
-            elif ((e[0] + e[3]) % 2) == 0:
+            elif ((nums[0] + nums[3]) % 2) == 0:
                 salt.append(5)
             else:
                 salt.append(8)
-      
             # Begin salting, second quartet
-            if (e[7] % 3) == 0:
-                if (e[5] - e[4]) > e[6]:
+            if (nums[7] % 3) == 0:
+                if (nums[5] - nums[4]) > nums[6]:
                     salt.append(2)
-                elif ((e[7] * e[5])+e[6]) > (e[6] * 4):
+                elif ((nums[7] * nums[5])+nums[6]) > (nums[6] * 4):
                     salt.append(4)
-                elif (e[4] + 5) > (e[7] + 2):
+                elif (nums[4] + 5) > (nums[7] + 2):
                     salt.append(9)
                 else:
                     salt.append(7)
-            elif (e[5] + 2) >= 7:
-                if e[4] < 8:
+            elif (nums[5] + 2) >= 7:
+                if nums[4] < 8:
                     salt.append(3)
                 else:
                     salt.append(0)
             else:
                 salt.append(6)
-      
             # Begin salting, third quartet
-            if (e[8] - e[11] + e[10]) > e[9]:
-                if (((e[10] + e[9]) or (e[10] - e[11])) % 2) == 0:
+            if (nums[8] - nums[11] + nums[10]) > nums[9]:
+                if (((nums[10] + nums[9]) or (nums[10] - nums[11])) % 2) == 0:
                     salt.append(7)
-                elif e[10] == (e[8] or e[9] or e[11]):
+                elif nums[10] == (nums[8] or nums[9] or nums[11]):
                     salt.append(2)
                 else:
                     salt.append(4)
-            elif (e[9] <= e[11]) or (e[10] <= e[11]):
-                if e[10] == (2 or 5 or 7 or 8):
+            elif (nums[9] <= nums[11]) or (nums[10] <= nums[11]):
+                if nums[10] == (2 or 5 or 7 or 8):
                     salt.append(1)
-                elif e[8] * 2 >= 9:
+                elif nums[8] * 2 >= 9:
                     salt.append(5)
                 else:
                     salt.append(3)
             else:
-                if e[8] < 6:
+                if nums[8] < 6:
                     salt.append(9)
                 else:
                     salt.append(8)
-      
             # Begin salting, all numbers
-            salt.append(str((e[4] + (e[7] + (e[8] - e[5])) * e[1] + ((e[11] + e[9] + e[6]) - (e[2] + e[0]) * 5) - e[3] + e[10]) % 10))
+            salt.append(str((nums[4] + (nums[7] + (nums[8] - nums[5])) * nums[1] + ((nums[11] + nums[9] + nums[6]) - (nums[2] + nums[0]) * 5) - nums[3] + nums[10]) % 10))
 
             # Salting the encryption key
-            e.insert(2,salt[0])
-            e.insert(9,salt[1])
-            e.insert(11,salt[2])
-            e.insert(7,salt[3])
+            nums.insert(2, salt[0])
+            nums.insert(9, salt[1])
+            nums.insert(11, salt[2])
+            nums.insert(7, salt[3])
 
-            for i in range(len(e)): # int to str converter
-                e[i] = str(e[i])
+            for i in enumerate(nums): # int to str converter
+                nums[i] = str(nums[i[1]])
 
-            self._encryption_key = ''.join(e) # The encryption key
-            del e
+            self._encryption_key = ''.join(nums) # The encryption key
+            del nums
             del salt
-            del password
             print('Encryption key generated!')
         else:
             pass # Request denied by program

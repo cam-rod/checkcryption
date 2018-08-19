@@ -12,7 +12,6 @@ import re
 
 def password_entry():
     """This function is called by accounts.user_entry() to get the password.
-  
     It requests a password, checks to see if the password is valid, and if so returns the password."""
     password = None
     while True:
@@ -25,8 +24,8 @@ def password_entry():
 
         if len(password) == 12:
             if re.search(r'^[A-Za-z0-9()[\]!@#,.*/]*$', password): # only valid characters used
-                if (re.search(r'[A-Z]', password) and re.search(r'[a-z]', password) and re.search(r'[0-9]', passsword)
-                and re.search(r'[()[\]!@#,.*/]', password)): # minimum character requirements
+                if (re.search(r'[A-Z]', password) and re.search(r'[a-z]', password) and re.search(r'[0-9]', password)
+                        and re.search(r'[()[\]!@#,.*/]', password)): # minimum character requirements
                     break
                 else:
                     print('That is not a valid password. Reason: password did not meet minimum requirements.')
@@ -55,7 +54,6 @@ def write_text(content, destination):
 
 def read_users(username):
     """This function checks if a username is found in users.txt and returns it if so.
-    
     The returned data is in the form of a dictionary containing \'user\' and \'e_user\'."""
     print('Retriving user data...')
     saved_data = {}
@@ -65,31 +63,30 @@ def read_users(username):
             located_data = re.search(username, file_text) # find the username
             try:
                 saved_data['user'] = file_text[located_data.start():located_data.end()] # Within the calculated span
-                saved_data['e_user'] = file_text[(located_data.end())+1:(re.search(';',file_text[located_data.end()+1:]))]
+                saved_data['e_user'] = file_text[(located_data.end())+1:(re.search(';', file_text[located_data.end()+1:]))]
                 # From 1 char after user (semicolon) to the following semicolon
                 break
             except:
                 break
-    
     del file_text
     del located_data
     return saved_data
 
 def write_users(user, e_user):
+    """This function writes user data to users.txt."""
     print('Saving account details...')
     successful = False
     while True:
         with open('users.txt', 'a+') as file:
-            file.seek(0,0) # Go to start of file
+            file.seek(0, 0) # Go to start of file
             list_all = file.read()
             if re.search(user, list_all): # username is already taken
                 break # failed setup
             else:
-                file.seek(0,2)
-                f.write('{};{};\n'.format(user, e_user)) # write usernames to a new line
+                file.seek(0, 2)
+                file.write('{};{};\n'.format(user, e_user)) # write usernames to a new line
                 successful = True
                 break
-    
     del file
     del list_all
     return successful

@@ -6,8 +6,8 @@ Functions:
     - main loop for what the user wants to do.
         - creates an account and adds usernames to users.txt.
         - signs in using data from users.txt.
-    - requests and returns the entered username, encrypted username, and password.
-"""
+    - requests and returns the entered username, encrypted username, and password."""
+
 from text_parser import password_entry, read_users, write_users
 from crypter import Crypter
 
@@ -35,7 +35,6 @@ def main():
         if option != ('1' or '2'):
             print('\nSorry, that\'s not a valid option. Please try again.')
             continue # Reattempt option selection
-        
         if option == '1': # Create account
             print('\nCreate your account here.')
             data = user_entry() # Get username and password
@@ -63,7 +62,7 @@ def main():
                 del data
                 del saved
                 print('No such username found. Please try again or create an account.')
-            if (data['user'] == saved['user']) && (data['e_user'] == saved['e_user']): # Correct password entered
+            if (data['user'] == saved['user']) and (data['e_user'] == saved['e_user']): # Correct password entered
                 password = data['pass']
                 del data
                 del saved

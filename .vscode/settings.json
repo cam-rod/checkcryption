@@ -4,11 +4,8 @@
         "crypted",
         "crypter",
         "crypting",
+        "nums",
         "odbp",
         "textcryption"
-    ],
-    "python.linting.enabled": false,
-    "python.linting.pylintArgs": [
-        "--disable=C0301"
-    ],
+    ]
 }
