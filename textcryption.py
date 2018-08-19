@@ -9,4 +9,7 @@ from text_parser import read_text, text_to_binary, write_text # Reads and writes
 
 print("Welcome to Textcryption, the program that helps you protect your data!")
 
-accounts.main() # Signs in user
+PASSWORD = accounts.main() # Signs in user
+
+while True: # The 'crypter' loop
+    pass
