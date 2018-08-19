@@ -2,7 +2,8 @@
 
 Functions:
     - Gets and verifies a valid password for signing in.
-    - Reads text from regular files or direct entry and converts to binary.
+    - Reads text from regular files or direct entry and returns it.
+    - Converts text to binary.
     - Writes encrypted text to files.
     - Reads and returns matching section from users.txt.
     - Writes usernames to users.txt."""
@@ -37,6 +38,20 @@ def password_entry():
             print('That is not a valid password. Reason: password was not 12 characters long.')
             continue
     return password
+
+def read_text(content, binary):
+    """This function reads the content of a text file or direct entry.
+
+    If requested, the text is then converted to binary before being returned."""
+    pass
+
+def text_to_binary(content):
+    """This function converts UTF-8 text to binary."""
+    pass
+
+def write_text(content, destination):
+    """This function writes encrypted text to the requested destination."""
+    pass
 
 def read_users(username):
     """This function checks if a username is found in users.txt and returns it if so.
