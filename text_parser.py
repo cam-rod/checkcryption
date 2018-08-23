@@ -11,8 +11,7 @@ Functions:
 import re
 
 def password_entry():
-    """This function is called by accounts.user_entry() to get the password.
-    It requests a password, checks to see if the password is valid, and if so returns the password."""
+    """This function is called by accounts.user_entry() to validate and return a user's password."""
     password = None
     while True:
         print('\nPassword requirements:')
@@ -23,12 +22,15 @@ def password_entry():
         password = input('Please enter your password: ')
 
         if len(password) == 12:
-            if re.search(r'^[A-Za-z0-9()[\]!@#,.*/]*$', password): # only valid characters used
-                if (re.search(r'[A-Z]', password) and re.search(r'[a-z]', password) and re.search(r'[0-9]', password)
-                        and re.search(r'[()[\]!@#,.*/]', password)): # minimum character requirements
+            if re.search(r'^[A-Za-z\d()[\]!@#,.*/]*$', password): # only valid characters used
+                if (re.search(r'[A-Z]', password)
+                        and re.search(r'[a-z]', password)
+                        and re.search(r'[0-9]', password)
+                        and re.search(r'[()[\]!@#,.*/]', password)):
                     break
                 else:
-                    print('That is not a valid password. Reason: password did not meet minimum requirements.')
+                    print('That is not a valid password.' +
+                          'Reason: password did not meet minimum requirements.')
                     continue
             else:
                 print('That is not a valid password. Reason: invalid characters used in password.')
@@ -62,11 +64,13 @@ def read_users(username):
             file_text = file.read() # get saved data
             located_data = re.search(username, file_text) # find the username
             try:
-                saved_data['user'] = file_text[located_data.start():located_data.end()] # Within the calculated span
-                saved_data['e_user'] = file_text[(located_data.end())+1:(re.search(';', file_text[located_data.end()+1:]))]
+                # Within the calculated span
+                saved_data['user'] = file_text[located_data.start():located_data.end()]
                 # From 1 char after user (semicolon) to the following semicolon
+                saved_data['e_user'] = file_text[(located_data.end())+1:
+                                                 (re.search(';', file_text[located_data.end()+1:]))]
                 break
-            except:
+            except AttributeError:
                 break
     del file_text
     del located_data

@@ -12,7 +12,7 @@ from text_parser import password_entry, read_users, write_users
 from crypter import Crypter
 
 def user_entry():
-    """This function requests the username and password from the user and returns them and the encrypted username."""
+    """This function requests username and password and returns them and the encrypted username."""
     data = {'user': None, 'pass': None, 'e_user': None} # e_user is the encrypted username
 
     data['user'] = input('\nPlease enter a username: ')
@@ -26,7 +26,7 @@ def user_entry():
     return data # Both usernames and the password
 
 def main():
-    """This is the main process that determines whether to sign in or to create an account, and does such."""
+    """This facilitates sign in or account creation."""
     password = None
     while True:
         print('\nWould you like to create an account or sign in to your account?')
@@ -39,7 +39,7 @@ def main():
             print('\nCreate your account here.')
             data = user_entry() # Get username and password
             print('\nCreating account...')
-            successful = write_users(data['user'], data['e_user']) # Write account details to users.txt
+            successful = write_users(data['user'], data['e_user']) # Add account to users.txt
 
             if successful:
                 del data
@@ -62,7 +62,8 @@ def main():
                 del data
                 del saved
                 print('No such username found. Please try again or create an account.')
-            if (data['user'] == saved['user']) and (data['e_user'] == saved['e_user']): # Correct password entered
+            if ((data['user'] == saved['user'])
+                    and (data['e_user'] == saved['e_user'])): # Correct password entered
                 password = data['pass']
                 del data
                 del saved

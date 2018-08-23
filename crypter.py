@@ -3,14 +3,14 @@
 import re
 
 class Crypter:
-    """This class temporarily generates the encryption key, calls the correct function, and then returns the text.
+    """This class generates the encryption key, calls the correct function, and returns the text.
 
     Arguments:
         - password: hashed (scrambled) version of the password, used to generate the encryption key
-        - text: in the form of plaintext (to be encrypted) or encrypted data (to be decrypted), depending on what is requested
+        - text: in plaintext (for encryption) or encrypted (for decryption) depending on the request
 
     Other variables:
-        - encryption_key: the key which directly instructs the program how to encrypt the data (hashed and salted)
+        - encryption_key: directly instructs the program how to encrypt the data (hashed and salted)
 
     Returns:
         - the encrypted (after encryption) or plaintext data (after decryption)."""
@@ -21,7 +21,7 @@ class Crypter:
         self.text = text
         self._encryption_key = None
     @property
-    def encryption_key(self): # Stored as property to allow other areas to allow encrypter/decrypter to call key
+    def encryption_key(self): # Stored as property to allow other areas to call key
         """Returns the encryption key."""
         return self._encryption_key
     @encryption_key.setter
@@ -148,7 +148,9 @@ class Crypter:
                 else:
                     salt.append(8)
             # Begin salting, all numbers
-            salt.append(str((nums[4] + (nums[7] + (nums[8] - nums[5])) * nums[1] + ((nums[11] + nums[9] + nums[6]) - (nums[2] + nums[0]) * 5) - nums[3] + nums[10]) % 10))
+            salt.append(str((nums[4] + (nums[7] + (nums[8] - nums[5]))
+                             * nums[1] + ((nums[11] + nums[9] + nums[6]) - (nums[2] + nums[0]) * 5)
+                             - nums[3] + nums[10]) % 10))
 
             # Salting the encryption key
             nums.insert(2, salt[0])
