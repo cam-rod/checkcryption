@@ -8,6 +8,7 @@ Functions:
         - signs in using data from users.txt.
     - requests and returns the entered username, encrypted username, and password."""
 
+import re
 from text_parser import password_entry, read_users, write_users
 from crypter import Crypter
 
@@ -31,11 +32,9 @@ def main():
     while True:
         print('\nWould you like to create an account or sign in to your account?')
         print('Note: an account is required to encrypt or decrypt data.\n')
-        option = input('Type \"1\" to create an account or \"2\" to sign in: ')
-        if option != ('1' or '2'):
-            print('\nSorry, that\'s not a valid option. Please try again.')
-            continue # Reattempt option selection
-        if option == '1': # Create account
+        option = input('Type \'c\' to create an account, \'s\' to sign in, or \'q\' to quit the program: ')
+        
+        if re.match('c', option.lower()): # Create account
             print('\nCreate your account here.')
             data = user_entry() # Get username and password
             print('\nCreating account...')
@@ -51,7 +50,7 @@ def main():
                 del successful
                 print('This username already exists. Please try another one.')
                 continue
-        else: # Sign in
+        elif re.match('s', option.lower()): # Sign in
             print('\nSign in here.')
             data = user_entry() # Get username and password
             print('\nSigning in...')
@@ -74,4 +73,9 @@ def main():
                 del saved
                 print('Sign in failed due to incorrect password. Please try again.')
                 continue
+        elif re.match('q', option.lower()): # quit program
+            return 
+        else:
+            print('\nSorry, that\'s not a valid option. Please try again.')
+            continue # Reattempt option selection
     return password
