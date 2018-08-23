@@ -148,9 +148,9 @@ class Crypter:
                 else:
                     salt.append(8)
             # Begin salting, all numbers
-            salt.append(str((nums[4] + (nums[7] + (nums[8] - nums[5]))
+            salt.append((nums[4] + (nums[7] + (nums[8] - nums[5]))
                              * nums[1] + ((nums[11] + nums[9] + nums[6]) - (nums[2] + nums[0]) * 5)
-                             - nums[3] + nums[10]) % 10))
+                             - nums[3] + nums[10]) % 10)
 
             # Salting the encryption key
             nums.insert(2, salt[0])
@@ -159,7 +159,7 @@ class Crypter:
             nums.insert(7, salt[3])
 
             for i in enumerate(nums): # int to str converter
-                nums[i] = str(nums[i[1]])
+                nums[i[0]] = str(nums[i[1]])
 
             self._encryption_key = ''.join(nums) # The encryption key
             del nums

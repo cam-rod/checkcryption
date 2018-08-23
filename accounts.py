@@ -61,6 +61,7 @@ def main():
                 del data
                 del saved
                 print('No such username found. Please try again or create an account.')
+                continue
             if ((data['user'] == saved['user'])
                     and (data['e_user'] == saved['e_user'])): # Correct password entered
                 password = data['pass']

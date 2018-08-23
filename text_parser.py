@@ -66,11 +66,16 @@ def read_users(username):
             try:
                 # Within the calculated span
                 saved_data['user'] = file_text[located_data.start():located_data.end()]
+            except AttributeError:
+                break
+            try:
                 # From 1 char after user (semicolon) to the following semicolon
                 saved_data['e_user'] = file_text[(located_data.end())+1:
                                                  (re.search(';', file_text[located_data.end()+1:]))]
                 break
-            except AttributeError:
+            except TypeError:
+                saved_data['user'] = None
+                saved_data['e_user'] = None
                 break
     del file_text
     del located_data
