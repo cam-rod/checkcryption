@@ -12,4 +12,13 @@ print("Welcome to Textcryption, the program that helps you protect your data!")
 PASSWORD = accounts.main() # Signs in user
 
 while True: # The 'crypter' loop
-    pass
+    print('\nWhat would you like to do?')
+    option = ((input('Type \'e\' to encrypt, \'d\' to decrypt: ')).lower())[0] # 1st char, lowercase
+
+    if option == 'e':
+        pass
+    elif option == 'd':
+        pass
+    else:
+        print('\nThat is not a valid option, please try again.')
+        continue
