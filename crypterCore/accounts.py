@@ -9,8 +9,8 @@ Functions:
     - requests and returns the entered username, encrypted username, and password."""
 
 import re
-from text_parser import password_entry, read_users, write_users
-from crypter import Crypter
+from crypterCore.text_parser import password_entry, read_users, write_users
+from crypterCore.crypter import Crypter
 
 def user_entry():
     """This function requests username and password and returns them and the encrypted username."""

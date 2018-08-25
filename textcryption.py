@@ -4,9 +4,9 @@ This module introduces the program to the user and calls other module to carry o
 The module also acts a the main menu."""
 
 import re
-import accounts # Account creation or sign in
-from crypter import Crypter # encrypts and decrypts files and text
-from text_parser import read_text, text_to_binary, write_text # Reads and writes text
+from crypterCore import accounts # Account creation or sign in
+from crypterCore.crypter import Crypter # encrypts and decrypts files and text
+from crypterCore.text_parser import read_text, text_to_binary, write_text # Reads and writes text
 
 option = None # Encrypt, decrypt, or quit
 source_type = None # Direct entry or file
