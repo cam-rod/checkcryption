@@ -57,6 +57,28 @@ while True: # The 'crypter' loop
             else:
                 print('That is not an option, please try again.')
                 continue
+            while True: # Destination
+                print("\nWhere would you like your data to be saved?")
+                print("Press \'1\' to overwrite the current file, \'2\' to create a new file,")
+                dest_type = input('or \'3\' to directly output to the command line.')
+
+                if dest_type == '1': # Overwrite file
+                    dest = source
+                    break
+                elif dest_type == '2': # Create a new file
+                    while True: # Location of source file
+                        print('\nPlease enter the COMPLETE intended location of your destination in one of these formats:')
+                        try:
+                            dest = input('C:\\\\Users\\\\Admin\\\\new_file.txt OR C:/Users/Admin/new_file.txt: ')
+                            break
+                        except SyntaxError: # Used C:\ instead of C:\\ or C:/
+                            print('Entry failed, please use the correct format!')
+                            continue 
+                elif dest_type == '3': # Print to command line
+                    break
+                else:
+                    print('That is not an option, please try again.')
+                continue
     elif re.match('d', option.lower()): # decrypt data
         print('\nDecryption menu:')
         while True: # Source data
@@ -88,6 +110,28 @@ while True: # The 'crypter' loop
                         continue
             else:
                 print('That is not an option, please try again.')
+                continue
+        while True: # Destination
+                print("\nWhere would you like your data to be saved?")
+                print("Press \'1\' to overwrite the current file, \'2\' to create a new file,")
+                dest_type = input('or \'3\' to directly output to the command line.')
+
+                if dest_type == '1': # Overwrite file
+                    dest = source
+                    break
+                elif dest_type == '2': # Create a new file
+                    while True: # Location of source file
+                        print('\nPlease enter the COMPLETE intended location of your destination in one of these formats:')
+                        try:
+                            dest = input('C:\\\\Users\\\\Admin\\\\new_file.txt OR C:/Users/Admin/new_file.txt: ')
+                            break
+                        except SyntaxError: # Used C:\ instead of C:\\ or C:/
+                            print('Entry failed, please use the correct format!')
+                            continue 
+                elif dest_type == '3': # Print to command line
+                    break
+                else:
+                    print('That is not an option, please try again.')
                 continue
     elif re.match('q', option.lower()): # quit
         break
