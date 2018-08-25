@@ -36,60 +36,7 @@ while True: # The 'crypter' loop
                     print('\nPlease enter the COMPLETE location of your file in one of these formats:')
                     try:
                         source = input('C:\\\\Users\\\\Admin\\\\file.txt OR C:/Users/Admin/file.txt: ')
-                        break
-                    except SyntaxError: # Used C:\ instead of C:\\ or C:/
-                        print('Entry failed, please use the correct format!')
-                        continue
-            elif source_type == '2':
-                while True:  # Type source data
-                    print('\nPlease enter your text here. To start a new line, use \\n in the line.')
-                    print('This field support all uppercase and lowercase letters, numbers, and \\n specifically (no symbols).')
-                    try:
-                        source = input()
-                        if re.search(r'[^A-Za-z0-9 \n]', source): # invalid character
-                            print('Entry failed, please use only the allowed characters!')
-                            continue
-                        else:
-                            break
-                    except SyntaxError:
-                        print('Entry failed, please use only the allowed characters!')
-                        continue
-            else:
-                print('That is not an option, please try again.')
-                continue
-            while True: # Destination
-                print("\nWhere would you like your data to be saved?")
-                print("Press \'1\' to overwrite the current file, \'2\' to create a new file,")
-                dest_type = input('or \'3\' to directly output to the command line.')
-
-                if dest_type == '1': # Overwrite file
-                    dest = source
-                    break
-                elif dest_type == '2': # Create a new file
-                    while True: # Location of source file
-                        print('\nPlease enter the COMPLETE intended location of your destination in one of these formats:')
-                        try:
-                            dest = input('C:\\\\Users\\\\Admin\\\\new_file.txt OR C:/Users/Admin/new_file.txt: ')
-                            break
-                        except SyntaxError: # Used C:\ instead of C:\\ or C:/
-                            print('Entry failed, please use the correct format!')
-                            continue 
-                elif dest_type == '3': # Print to command line
-                    break
-                else:
-                    print('That is not an option, please try again.')
-                continue
-    elif re.match('d', option.lower()): # decrypt data
-        print('\nDecryption menu:')
-        while True: # Source data
-            print('\nHow would you like to select your data to be decrypted?')
-            source_type = input('Press \'1\' to use a file, or \'2\' to directly input the text.')
-
-            if source_type == '1':
-                while True: # Location of source file
-                    print('\nPlease enter the COMPLETE location of your file in one of these formats:')
-                    try:
-                        source = input('C:\\\\Users\\\\Admin\\\\file.txt OR C:/Users/Admin/file.txt: ')
+                        source = read_text(source, True)
                         break
                     except SyntaxError: # Used C:\ instead of C:\\ or C:/
                         print('Entry failed, please use the correct format!')
@@ -112,27 +59,121 @@ while True: # The 'crypter' loop
                 print('That is not an option, please try again.')
                 continue
         while True: # Destination
-                print("\nWhere would you like your data to be saved?")
-                print("Press \'1\' to overwrite the current file, \'2\' to create a new file,")
-                dest_type = input('or \'3\' to directly output to the command line.')
+            print("\nWhere would you like your data to be saved?")
+            print("Press \'1\' to overwrite the current file, \'2\' to create a new file,")
+            dest_type = input('or \'3\' to directly output to the command line.')
 
-                if dest_type == '1': # Overwrite file
-                    dest = source
-                    break
-                elif dest_type == '2': # Create a new file
-                    while True: # Location of source file
-                        print('\nPlease enter the COMPLETE intended location of your destination in one of these formats:')
-                        try:
-                            dest = input('C:\\\\Users\\\\Admin\\\\new_file.txt OR C:/Users/Admin/new_file.txt: ')
-                            break
-                        except SyntaxError: # Used C:\ instead of C:\\ or C:/
-                            print('Entry failed, please use the correct format!')
-                            continue 
-                elif dest_type == '3': # Print to command line
-                    break
-                else:
-                    print('That is not an option, please try again.')
+            if dest_type == '1': # Overwrite file
+                dest = source
+                break
+            elif dest_type == '2': # Create a new file
+                while True: # Location of source file
+                    print('\nPlease enter the COMPLETE intended location of your destination in one of these formats:')
+                    try:
+                        dest = input('C:\\\\Users\\\\Admin\\\\new_file.txt OR C:/Users/Admin/new_file.txt: ')
+                        break
+                    except SyntaxError: # Used C:\ instead of C:\\ or C:/
+                        print('Entry failed, please use the correct format!')
+                        continue 
+            elif dest_type == '3': # Print to command line
+                break
+            else:
+                print('That is not an option, please try again.')
                 continue
+        for attempt in range(6): # 3 password attempts, arbitrary number used
+            attempt += 1
+            if attempt > 3:
+                print("All attempts used, please start again.")
+                del source, source_type, dest, dest_type, confirm
+                break
+            confirm = input('\nPlease enter your password to confirm the operation (attempt {} of 3): '.format(attempt+1))
+            if confirm == PASSWORD:
+                print('Generating encryption key...')
+                processing = Crypter(PASSWORD, source)
+                processing.encryption_key = True
+
+                print('Decrypting text...')
+                write_text(processing.encrypter(), dest)
+                print('Done! Check {} to see your decrypted file.'.format(dest))
+                continue
+            else:
+                print('That is not the correct password.')
+        continue
+    elif re.match('d', option.lower()): # decrypt data
+        print('\nDecryption menu:')
+        while True: # Source data
+            print('\nHow would you like to select your data to be decrypted?')
+            source_type = input('Press \'1\' to use a file, or \'2\' to directly input the text.')
+
+            if source_type == '1':
+                while True: # Location of source file
+                    print('\nPlease enter the COMPLETE location of your file in one of these formats:')
+                    try:
+                        source = input('C:\\\\Users\\\\Admin\\\\file.txt OR C:/Users/Admin/file.txt: ')
+                        source = read_text(source, True)
+                        break
+                    except SyntaxError: # Used C:\ instead of C:\\ or C:/
+                        print('Entry failed, please use the correct format!')
+                        continue
+            elif source_type == '2':
+                while True:  # Type source data
+                    print('\nPlease enter your text here. To start a new line, use \\n in the line.')
+                    print('This field support all uppercase and lowercase letters, numbers, and \\n specifically (no symbols).')
+                    try:
+                        source = input()
+                        if re.search(r'[^A-Za-z0-9 \n]', source): # invalid character
+                            print('Entry failed, please use only the allowed characters!')
+                            continue
+                        else:
+                            break
+                    except SyntaxError:
+                        print('Entry failed, please use only the allowed characters!')
+                        continue
+            else:
+                print('That is not an option, please try again.')
+                continue
+        while True: # Destination
+            print("\nWhere would you like your data to be saved?")
+            print("Press \'1\' to overwrite the current file, \'2\' to create a new file,")
+            dest_type = input('or \'3\' to directly output to the command line.')
+
+            if dest_type == '1': # Overwrite file
+                dest = source
+                break
+            elif dest_type == '2': # Create a new file
+                while True: # Location of source file
+                    print('\nPlease enter the COMPLETE intended location of your destination in one of these formats:')
+                    try:
+                        dest = input('C:\\\\Users\\\\Admin\\\\new_file.txt OR C:/Users/Admin/new_file.txt: ')
+                        break
+                    except SyntaxError: # Used C:\ instead of C:\\ or C:/
+                        print('Entry failed, please use the correct format!')
+                        continue 
+            elif dest_type == '3': # Print to command line
+                break
+            else:
+                print('That is not an option, please try again.')
+                continue
+        for attempt in range(6): # 3 password attempts, arbitrary number used
+            attempt += 1
+            if attempt > 3:
+                print("All attempts used, please start again.")
+                del source, source_type, dest, dest_type, confirm
+                break
+            confirm = input('\nPlease enter your password to confirm the operation (attempt {} of 3): '.format(attempt+1))
+            if confirm == PASSWORD:
+                print('Generating encryption key...')
+                processing = Crypter(PASSWORD, source)
+                processing.encryption_key = True
+
+                print('Encrypting text...')
+                write_text(processing.encrypter(), dest)
+                print('Done! Check {} to see your encrypted file.'.format(dest))
+                del source, source_type, dest, dest_type, confirm
+                break
+            else:
+                print('That is not the correct password.')
+        continue
     elif re.match('q', option.lower()): # quit
         break
     else:
