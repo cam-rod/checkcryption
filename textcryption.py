@@ -37,6 +37,10 @@ while True: # The 'crypter' loop
                     try:
                         source = input('C:\\\\Users\\\\Admin\\\\file.txt OR C:/Users/Admin/file.txt: ')
                         source = read_text(source, True)
+
+                        if source == FileNotFoundError: # Invalid format
+                            print('Entry failed, please use the correct format!')
+                            continue
                         break
                     except SyntaxError: # Used C:\ instead of C:\\ or C:/
                         print('Entry failed, please use the correct format!')
@@ -71,6 +75,14 @@ while True: # The 'crypter' loop
                     print('\nPlease enter the COMPLETE intended location of your destination in one of these formats:')
                     try:
                         dest = input('C:\\\\Users\\\\Admin\\\\new_file.txt OR C:/Users/Admin/new_file.txt: ')
+
+                        try: # Check for valid filepath
+                            with open(dest) as file:
+                                tmp = 1
+                                del tmp
+                        except FileNotFoundError:
+                            print('Entry failed, please use the correct format!')
+                            continue
                         break
                     except SyntaxError: # Used C:\ instead of C:\\ or C:/
                         print('Entry failed, please use the correct format!')
@@ -112,6 +124,10 @@ while True: # The 'crypter' loop
                     try:
                         source = input('C:\\\\Users\\\\Admin\\\\file.txt OR C:/Users/Admin/file.txt: ')
                         source = read_text(source, True)
+                        
+                        if source == FileNotFoundError: # Invalid format
+                            print('Entry failed, please use the correct format!')
+                            continue
                         break
                     except SyntaxError: # Used C:\ instead of C:\\ or C:/
                         print('Entry failed, please use the correct format!')
@@ -146,6 +162,14 @@ while True: # The 'crypter' loop
                     print('\nPlease enter the COMPLETE intended location of your destination in one of these formats:')
                     try:
                         dest = input('C:\\\\Users\\\\Admin\\\\new_file.txt OR C:/Users/Admin/new_file.txt: ')
+
+                        try: # Check for valid filepath
+                            with open(dest) as file:
+                                tmp = 1
+                                del tmp
+                        except FileNotFoundError:
+                            print('Entry failed, please use the correct format!')
+                            continue
                         break
                     except SyntaxError: # Used C:\ instead of C:\\ or C:/
                         print('Entry failed, please use the correct format!')
