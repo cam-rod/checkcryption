@@ -95,6 +95,7 @@ while True: # The 'crypter' loop
                 print('Decrypting text...')
                 write_text(processing.encrypter(), dest)
                 print('Done! Check {} to see your decrypted file.'.format(dest))
+                del source, source_type, dest, dest_type, confirm, processing
                 continue
             else:
                 print('That is not the correct password.')
@@ -169,7 +170,7 @@ while True: # The 'crypter' loop
                 print('Encrypting text...')
                 write_text(processing.encrypter(), dest)
                 print('Done! Check {} to see your encrypted file.'.format(dest))
-                del source, source_type, dest, dest_type, confirm
+                del source, source_type, dest, dest_type, confirm, processing
                 break
             else:
                 print('That is not the correct password.')
@@ -179,4 +180,5 @@ while True: # The 'crypter' loop
     else:
         print('\nThat is not a valid option, please try again.')
         continue
+del PASSWORD
 print('\nThank you for using Textcryption!')
