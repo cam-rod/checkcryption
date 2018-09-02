@@ -16,10 +16,10 @@ dest = None #E  Exported data
 
 print("Welcome to Textcryption, the program that helps you protect your data!")
 
-PASSWORD = accounts.main() # Signs in user
+E_USER = accounts.main() # Signs in user
 
 while True: # The 'crypter' loop
-    if PASSWORD == None: # User opted to quit from signin menu
+    if E_USER == None: # User opted to quit from signin menu
         break
 
     print('\nWhat would you like to do?')
@@ -102,18 +102,19 @@ while True: # The 'crypter' loop
             attempt += 1
             if attempt > 3:
                 print("All attempts used, please start again.")
-                del source, source_location, source_type, dest, dest_type, confirm
+                del source, source_location, source_type, dest, dest_type, verify
                 break
-            confirm = input('\nPlease enter your password to confirm the operation (attempt {} of 3): '.format(attempt+1))
-            if confirm == PASSWORD:
+            print('\nPlease confirm your identity (attempt {} of 3): '.format(attempt+1))
+            verify = accounts.user_entry()
+            if verify['e_user'] == E_USER:
                 print('Generating encryption key...')
-                processing = Crypter(PASSWORD, source)
+                processing = Crypter(verify['pass'], source)
                 processing.encryption_key = True
 
                 print('Decrypting text...')
                 write_text(processing.encrypter(), dest, None)
-                print('Done! Check {} to see your decrypted file.'.format(dest))
-                del source, source_location, source_type, dest, dest_type, confirm, processing
+                print('Done! Check {} to see your encrypted file.'.format(dest))
+                del source, source_location, source_type, dest, dest_type, processing, verify
                 continue
             else:
                 print('That is not the correct password.')
@@ -194,18 +195,19 @@ while True: # The 'crypter' loop
             attempt += 1
             if attempt > 3:
                 print("All attempts used, please start again.")
-                del source, source_location, source_type, dest, dest_type, confirm
+                del source, source_location, source_type, dest, dest_type, verify
                 break
-            confirm = input('\nPlease enter your password to confirm the operation (attempt {} of 3): '.format(attempt+1))
-            if confirm == PASSWORD:
+            print('\nPlease confirm your identity (attempt {} of 3): '.format(attempt+1))
+            verify = accounts.user_entry()
+            if verify['e_user'] == E_USER:
                 print('Generating encryption key...')
-                processing = Crypter(PASSWORD, source)
+                processing = Crypter(verify['pass'], source)
                 processing.encryption_key = True
 
                 print('Encrypting text...')
                 write_text(processing.encrypter(), dest, False)
                 print('Done! Check {} to see your encrypted file.'.format(dest))
-                del source, source_location, source_type, dest, dest_type, confirm, processing
+                del source, source_location, source_type, dest, dest_type, verify, processing
                 break
             else:
                 print('That is not the correct password.')
@@ -215,5 +217,5 @@ while True: # The 'crypter' loop
     else:
         print('\nThat is not a valid option, please try again.')
         continue
-del PASSWORD
+del E_USER
 print('\nThank you for using Textcryption!')

@@ -28,7 +28,7 @@ def user_entry():
 
 def main():
     """This facilitates sign in or account creation."""
-    password = None
+    e_user = None
     while True:
         print('\nWould you like to create an account or sign in to your account?')
         print('Note: an account is required to encrypt or decrypt data.\n')
@@ -64,7 +64,7 @@ def main():
                 continue
             if ((data['user'] == saved['user'])
                     and (data['e_user'] == saved['e_user'])): # Correct password entered
-                password = data['pass']
+                e_user = data['e_user']
                 del data
                 del saved
                 print('You\'ve been signed in!')
@@ -79,4 +79,4 @@ def main():
         else:
             print('\nSorry, that\'s not a valid option. Please try again.')
             continue # Reattempt option selection
-    return password
+    return e_user
