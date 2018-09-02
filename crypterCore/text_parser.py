@@ -46,12 +46,17 @@ def read_text(content, binary):
     If requested, the text is then converted to binary before being returned."""
     pass
 
-def text_to_binary(content):
-    """This function converts UTF-8 text to binary."""
-    pass
+def text_binary(content, binary):
+    """This function converts UTF-8 text to binary or vice versa.
+    
+    If binary is True, the text will be converted to binary; if False, from binary."""
+    if binary == None:
+        pass
 
-def write_text(content, destination):
-    """This function writes encrypted text to the requested destination."""
+def write_text(content, destination, binary):
+    """This function writes encrypted text to the requested destination.
+    
+    If requested, the text is then converted from binary before being returned."""
     pass
 
 def read_users(username):
