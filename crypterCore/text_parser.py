@@ -68,9 +68,15 @@ def write_text(content, destination, binary):
     If requested, the text is then converted from binary before being written."""
     
     content = text_binary(content, binary) # Convert from binary if requested
-    
-    with open(destination, 'w+') as file:
-        file.write(content)
+
+    if destination == None: # Command line output
+        print('')
+        print(content)
+    else:
+        with open(destination, 'w+') as file:
+            print('\nWriting text to file...')
+            file.write(content)
+            print('Successful!')
 
 def read_users(username):
     """This function checks if a username is found in users.txt and returns it if so.

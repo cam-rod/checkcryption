@@ -93,6 +93,7 @@ while True: # The 'crypter' loop
                         print('Entry failed, please use the correct format!')
                         continue 
             elif dest_type == '3': # Print to command line
+                dest = None
                 break
             else:
                 print('That is not an option, please try again.')
