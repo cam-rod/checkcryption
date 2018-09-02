@@ -44,14 +44,23 @@ def read_text(content, binary):
     """This function reads the content of a text file or direct entry.
 
     If requested, the text is then converted to binary before being returned."""
-    pass
+
+    try:
+        with open(content) as file:
+            source = file.read()
+        source = text_binary(source, binary) # Convert to binary if requested
+
+        return source
+    except FileNotFoundError:
+        return FileNotFoundError
 
 def text_binary(content, binary):
     """This function converts UTF-8 text to binary or vice versa.
     
     If binary is True, the text will be converted to binary; if False, from binary."""
+
     if binary == None:
-        pass
+        return content
 
 def write_text(content, destination, binary):
     """This function writes encrypted text to the requested destination.
