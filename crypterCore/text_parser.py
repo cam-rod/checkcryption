@@ -63,10 +63,14 @@ def text_binary(content, binary):
         return content
 
 def write_text(content, destination, binary):
-    """This function writes encrypted text to the requested destination.
+    """This function writes text to the requested destination.
     
-    If requested, the text is then converted from binary before being returned."""
-    pass
+    If requested, the text is then converted from binary before being written."""
+    
+    content = text_binary(content, binary) # Convert from binary if requested
+    
+    with open(destination, 'w+') as file:
+        file.write(content)
 
 def read_users(username):
     """This function checks if a username is found in users.txt and returns it if so.
