@@ -11,9 +11,13 @@ def file_location(*purpose):
     The variable purpose (optional) specify whether it is a source or destination file location."""
 
     while True:
-        print('\nPlease enter the COMPLETE location of your file in one of these formats:')
+        print('\nPlease enter the COMPLETE location of your .txt file in one of these formats:')
         try:
-            location = input('C:\\\\Users\\\\Admin\\\\file.txt OR C:/Users/Admin/file.txt: ')
+            location = input('C:\\\\Users\\\\Admin\\\\file.txt OR C:/Users/Admin/file.txt:')
+
+            if not re.search('.txt$', location): # Only .txt files allowed
+                print('That is not a .txt file, please try again.')
+                continue
 
             if purpose == 's': # Get source data
                 source = read_text(location, True)
