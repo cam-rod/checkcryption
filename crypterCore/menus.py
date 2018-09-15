@@ -98,7 +98,7 @@ def dest_menu(source_location):
             continue
     return dest
 
-def verify_menu(source, dest, E_USER):
+def verify_menu(source, dest, E_USER, process):
     """This menu verifies that the user is who they say they are, and then runs the encryption/decryption."""
 
     for attempt in range(6): # 3 password attempts, arbitrary number used
@@ -114,9 +114,14 @@ def verify_menu(source, dest, E_USER):
             processing = Crypter(verify['pass'], source)
             processing.encryption_key = True
 
-            print('Decrypting text...')
-            write_text(processing.encrypter(), dest, None)
-            print('Done! Check {} to see your encrypted file.'.format(dest))
+            if process == 'e': # Encrypt
+                print('Encrypting text...')
+                write_text(processing.encrypter(), dest, None)
+                print('Done! Check {} to see your encrypted file.'.format(dest))
+            else: # Decrypt
+                print('Decrypting text...')
+                write_text(processing.encrypter(), dest, None)
+                print('Done! Check {} to see your decrypted file.'.format(dest))
             del source, dest, processing, verify
             continue
         else:
@@ -141,7 +146,7 @@ def main(E_USER):
             dest = dest_menu(source_location) # Get destination location
             del source_location
             
-            verify_menu(source, dest, E_USER) # Verify user and encrypt
+            verify_menu(source, dest, E_USER, 'e') # Verify user and encrypt
 
             continue
         elif re.match('d', option.lower()): # decrypt data
@@ -151,7 +156,7 @@ def main(E_USER):
             dest = dest_menu(source_location) # Get destination location
             del source_location
 
-            verify_menu(source, dest, E_USER) # Verify user and decrypt
+            verify_menu(source, dest, E_USER, 'd') # Verify user and decrypt
 
             continue
         elif re.match('q', option.lower()): # quit

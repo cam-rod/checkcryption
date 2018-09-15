@@ -9,7 +9,7 @@ Functions:
     - requests and returns the entered username, encrypted username, and password."""
 
 import re
-from crypterCore.text_parser import password_entry, read_users, write_users
+from crypterCore.text_parser import password_entry, read_users, write_users, text_binary
 from crypterCore.crypter import Crypter
 
 def user_entry():
@@ -19,6 +19,7 @@ def user_entry():
     data['user'] = input('\nPlease enter a username: ')
     data['pass'] = password_entry()
 
+    data['user'] = text_binary(data['user'], True)
     en_user = Crypter(data['pass'], data['user']) # Crypter object to create encrypted username
     en_user.encryption_key = True # Generate encryption key
     data['e_user'] = en_user.encrypter() # Encrypt the username
