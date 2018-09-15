@@ -58,7 +58,36 @@ def text_binary(content, binary):
     """This function converts UTF-8 text to binary or vice versa.
     
     If binary is True, the text will be converted to binary; if False, from binary."""
+    new_content = '' # Converted content
 
+    if binary:
+        for char in content:
+            char_array = '/'.join(map(bin,bytearray(char, 'utf8'))).split('/') # Extract all bytes
+            
+            char_list = [] # Formatted text for appending
+            for byte in char_array:
+                # Split out the 'b' and only save the last 8 bits
+                char_list.append(''.join(byte.split('b')[-8:]))
+            
+            # Remove extra characters for easy conversion with chr later
+            if len(list) == 1:
+                char_list[0] = char_list[0][-7:]
+            elif len(list) == 2:
+                char_list[0] = char_list[0][-5:]
+                char_list[1] = char_list[0][-6:]
+            elif len(list) == 3:
+                char_list[0] = char_list[0][-4:]
+                char_list[1] = char_list[1][-6:]
+                char_list[2] = char_list[2][-6:]
+            else:
+                char_list[0] = char_list[0][-3:]
+                char_list[1] = char_list[1][-6:]
+                char_list[2] = char_list[2][-6:]
+                char_list[3] = char_list[3][-6:]
+            
+            new_content += '2'+''.join(char_list)
+        
+        return int(new_content) # Return as integer
     if binary == None:
         return content
 
