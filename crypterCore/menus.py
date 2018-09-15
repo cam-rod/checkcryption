@@ -5,9 +5,10 @@ from crypterCore import accounts
 from crypterCore.crypter import Crypter # encrypts and decrypts files and text
 from crypterCore.text_parser import read_text, text_binary, write_text # Reads and writes text
 
-def file_location(*purpose):
+def file_location(option, *purpose):
     """This function requests a file location from the user.
 
+    The variable option determines whether the text should be converted from binary or not
     The variable purpose (optional) specify whether it is a source or destination file location."""
 
     while True:
@@ -20,7 +21,11 @@ def file_location(*purpose):
                 continue
 
             if purpose == 's': # Get source data
-                source = read_text(location, True)
+                if option == 'e': # To be encrypted
+                    source = read_text(location, True)
+                elif option == 'd': # To be decrypted
+                    source = read_text(location, None)
+                
 
                 if source == FileNotFoundError: # Invalid format
                     print('Entry failed, please use the correct format!')
@@ -49,7 +54,7 @@ def source_menu(option):
         source_type = input('Press \'1\' to use a file, or \'2\' to directly input the text.')
 
         if source_type == '1':
-            source, source_location = file_location('s')
+            source, source_location = file_location(option,'s')
             
         elif source_type == '2':
             while True:  # Type source data
@@ -61,7 +66,10 @@ def source_menu(option):
                         print('Entry failed, please use only the allowed characters!')
                         continue
                     else:
-                        source = text_binary(source, True)
+                        if option == 'e': # To be encrypted
+                            source = text_binary(source, True)
+                        elif option == 'd':
+                            source = text_binary(source, None)
                         break
                 except SyntaxError:
                     print('Entry failed, please use only the allowed characters!')
@@ -89,7 +97,7 @@ def dest_menu(source_location):
                 dest = source_location
                 break
         elif dest_type == '2': # Create a new file
-            dest = file_location()
+            dest = file_location(None)
         elif dest_type == '3': # Print to command line
             dest = None
             break
@@ -120,7 +128,7 @@ def verify_menu(source, dest, E_USER, process):
                 print('Done! Check {} to see your encrypted file.'.format(dest))
             else: # Decrypt
                 print('Decrypting text...')
-                write_text(processing.encrypter(), dest, None)
+                write_text(processing.decrypter(), dest, False)
                 print('Done! Check {} to see your decrypted file.'.format(dest))
             del source, dest, processing, verify
             continue
