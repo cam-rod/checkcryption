@@ -148,7 +148,7 @@ class Crypter:
                 else:
                     salt.append(8)
             # Begin salting, all numbers
-            salt.append((nums[4] + (nums[7] + (nums[8] - nums[5]))
+            salt.append((nums[4] - nums[0] + (nums[7] + (nums[8] - nums[5]))
                              * nums[1] + ((nums[11] + nums[9] + nums[6]) - (nums[2] + nums[0]) * 5)
                              - nums[3] + nums[10]) % 10)
 
@@ -170,7 +170,21 @@ class Crypter:
 
     def encrypter(self):
         """This encrypts the text."""
-        pass
+        key = lambda num: int(self._encryption_key[num]) # Return the numeric value from the key
+        text = self.text
+
+        # All equations with multiplication add a value to prevent multiplying by 0
+        text = int(str(text)[:4] + self._encryption_key[7] + str(text)[4:]) # Salting
+        text *= int(self._encryption_key[15] + self._encryption_key[1]) + 3  # ex.: *int('3'+'0') -> *30
+        text += 200 * (key(8) - key(3))
+        text -= 15
+        text -= (key(6) * key(12)) + key(0)
+        text *= (13 * key(13)) + 2
+        text -= key(2) - key(4) - key(5) + key(11)
+        text += key(10) * key(9)
+        text *= (key(14) ** 2) + 1
+
+        return str(text) # Return as string for writing to file
 
     def decrypter(self):
         """This decrypts the text."""
