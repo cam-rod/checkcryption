@@ -188,4 +188,19 @@ class Crypter:
 
     def decrypter(self):
         """This decrypts the text."""
-        pass
+        key = lambda num: int(self._encryption_key[num]) # Return the numeric value from the key
+        text = self.text
+
+        # Begin decryption
+        text /= (key(14) ** 2) + 1
+        text -= key(10) * key(9)
+        text += key(2) - key(4) - key(5) + key(11)
+        text /= (13 * key(13)) + 2
+        text += (key(6) * key(12)) + key(0)
+        text += 15
+        text -= 200 * (key(8) - key(3))
+        text /= int(self._encryption_key[15] + self._encryption_key[1]) + 3
+        text = str(text)[:4] + str(text)[5:] # Remove salted character, leave as str
+
+        text = text[0:re.search('.', text).start] # Remove any decimal points
+        return text
