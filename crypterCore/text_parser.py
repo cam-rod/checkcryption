@@ -46,7 +46,9 @@ def text_binary(content, binary):
     If binary is True, the text will be converted to binary; if False, from binary."""
     new_content = '' # Converted content
 
-    if binary:
+    if binary == None:
+        return content
+    elif binary:
         for char in content:
             char_array = '/'.join(map(bin,bytearray(char, 'utf8'))).split('/') # Extract all bytes
             
@@ -74,8 +76,21 @@ def text_binary(content, binary):
             new_content += '2'+''.join(char_list)
         
         return int(new_content) # Return as integer
-    if binary == None:
-        return content
+    elif binary == False:
+        content = str(content)
+        seek = 0 # ID's what has already been extracted
+        twofind = re.search('2', content[seek+1:]).start() # Return the location of next 2 in content
+
+        while True:
+            char = content[seek+1:twofind] # From after the 2 to before the next one
+            char = chr(int(char, 2)) # Convert to utf-8
+            new_content += char
+
+            seek = twofind
+            if seek == 0: # Loop completed
+                break
+
+        return new_content # For saving
 
 def read_text(content, binary):
     """This function reads the content of a text file or direct entry.
