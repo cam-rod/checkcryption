@@ -39,7 +39,7 @@ def main():
             print('\nCreate your account here.')
             data = user_entry() # Get username and password
             print('\nCreating account...')
-            successful = write_users(data['user'], data['e_user']) # Add account to users.txt
+            successful = write_users(str(data['user']), data['e_user']) # Add account to users.txt
 
             if successful:
                 del data
@@ -63,7 +63,7 @@ def main():
                 del saved
                 print('No such username found. Please try again or create an account.')
                 continue
-            if ((data['user'] == saved['user'])
+            if ((str(data['user']) == saved['user'])
                     and (data['e_user'] == saved['e_user'])): # Correct password entered
                 e_user = data['e_user']
                 del data

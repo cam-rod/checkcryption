@@ -29,14 +29,14 @@ def password_entry():
                         and re.search(r'[()[\]!@#,.*/]', password)):
                     break
                 else:
-                    print('That is not a valid password.' +
+                    print('\nThat is not a valid password.' +
                           'Reason: password did not meet minimum requirements.')
                     continue
             else:
-                print('That is not a valid password. Reason: invalid characters used in password.')
+                print('\nThat is not a valid password. Reason: invalid characters used in password.')
                 continue
         else:
-            print('That is not a valid password. Reason: password was not 12 characters long.')
+            print('\nThat is not a valid password. Reason: password was not 12 characters long.')
             continue
     return password
 
@@ -58,12 +58,12 @@ def text_binary(content, binary):
                 char_list.append(''.join(byte.split('b')[-8:]))
             
             # Remove extra characters for easy conversion with chr later
-            if len(list) == 1:
+            if len(char_list) == 1:
                 char_list[0] = char_list[0][-7:]
-            elif len(list) == 2:
+            elif len(char_list) == 2:
                 char_list[0] = char_list[0][-5:]
                 char_list[1] = char_list[0][-6:]
-            elif len(list) == 3:
+            elif len(char_list) == 3:
                 char_list[0] = char_list[0][-4:]
                 char_list[1] = char_list[1][-6:]
                 char_list[2] = char_list[2][-6:]
@@ -130,7 +130,7 @@ def read_users(username):
     while True:
         with open('users.txt', 'r+') as file:
             file_text = file.read() # get saved data
-            located_data = re.search(username, file_text) # find the username
+            located_data = re.search(str(username), file_text) # find the username
             try:
                 # Within the calculated span
                 saved_data['user'] = file_text[located_data.start():located_data.end()]
@@ -139,7 +139,8 @@ def read_users(username):
             try:
                 # From 1 char after user (semicolon) to the following semicolon
                 saved_data['e_user'] = file_text[(located_data.end())+1:
-                                                 (re.search(';', file_text[located_data.end()+1:]))]
+                                                 (re.search(';', file_text[located_data.end()+1:]).start())
+                                                 +located_data.end()+1]
                 break
             except TypeError:
                 saved_data['user'] = None

@@ -51,15 +51,16 @@ def source_menu(option):
 
     while True:
         print('\nWhere is the data you would like to be {}?'.format(question))
-        source_type = input('Press \'1\' to use a file, or \'2\' to directly input the text.')
+        source_type = input('Press \'1\' to use a file, or \'2\' to directly input the text. ')
 
         if source_type == '1':
             source, source_location = file_location(option,'s')
+            break
             
         elif source_type == '2':
             while True:  # Type source data
                 print('\nPlease enter your text here. To start a new line, use \\n in the line.')
-                print('This field support all uppercase and lowercase letters, numbers, and \\n specifically (no symbols).')
+                print('This field support all uppercase and lowercase letters, numbers, and \\n specifically (no symbols).\n')
                 try:
                     source = input()
                     if re.search(r'[^A-Za-z0-9 \n]', source): # invalid character
@@ -74,6 +75,7 @@ def source_menu(option):
                 except SyntaxError:
                     print('Entry failed, please use only the allowed characters!')
                     continue
+            break
         else:
             print('That is not an option, please try again.')
             continue
@@ -87,7 +89,7 @@ def dest_menu(source_location):
     while True:
         print("\nWhere would you like your data to be saved?")
         print("Press \'1\' to overwrite the current file, \'2\' to create a new file,")
-        dest_type = input('or \'3\' to directly output to the command line.')
+        dest_type = input('or \'3\' to directly output to the command line. ')
 
         if dest_type == '1': # Overwrite file
             if source_location == None:
@@ -137,7 +139,7 @@ def verify_menu(source, dest, E_USER, process):
                 else:
                     print('Done! Check {} to see your decrypted file.'.format(dest))
             del source, dest, processing, verify
-            continue
+            break
         else:
             print('That is not the correct password.')
 

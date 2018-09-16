@@ -10,6 +10,9 @@ print("Welcome to Textcryption, the program that helps you protect your data!")
 
 E_USER = accounts.main() # Signs in user
 
-menus.main(E_USER)
+if E_USER == None: # User opted to quit
+    pass
+else:
+    menus.main(E_USER)
 
 print('\nThank you for using Textcryption!')
