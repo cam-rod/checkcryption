@@ -125,11 +125,17 @@ def verify_menu(source, dest, E_USER, process):
             if process == 'e': # Encrypt
                 print('Encrypting text...')
                 write_text(processing.encrypter(), dest, None)
-                print('Done! Check {} to see your encrypted file.'.format(dest))
+                if dest == None:
+                    print('Done!')
+                else:
+                    print('Done! Check {} to see your encrypted file.'.format(dest))
             else: # Decrypt
                 print('Decrypting text...')
                 write_text(processing.decrypter(), dest, False)
-                print('Done! Check {} to see your decrypted file.'.format(dest))
+                if dest == None:
+                    print('Done!')
+                else:
+                    print('Done! Check {} to see your decrypted file.'.format(dest))
             del source, dest, processing, verify
             continue
         else:
