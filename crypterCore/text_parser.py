@@ -79,16 +79,22 @@ def text_binary(content, binary):
     elif binary == False:
         content = str(content)
         seek = 0 # ID's what has already been extracted
-        twofind = re.search('2', content[seek+1:]).start() # Return the location of next 2 in content
+        twofind = re.search('2', content[seek+1:]) # Return the location of next 2 in content
 
         while True:
-            char = content[seek+1:twofind] # From after the 2 to before the next one
-            char = chr(int(char, 2)) # Convert to utf-8
-            new_content += char
-
-            seek = twofind
-            if seek == 0: # Loop completed
-                break
+            try:
+                char = content[seek+1:twofind.start()] # From after the 2 to before the next one
+            except AttributeError: # For last character
+                char = content[seek+1:]
+            finally:
+                char = chr(int(char, 2)) # Convert to utf-8
+                new_content += char
+                try:
+                    seek = twofind.start()
+                    if seek == 0: # Loop completed
+                        break
+                except AttributeError: # Loop completed by NoneType
+                    break
 
         return new_content # For saving
 
