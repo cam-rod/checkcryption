@@ -5,7 +5,7 @@ from crypterCore import accounts
 from crypterCore.crypter import Crypter # encrypts and decrypts files and text
 from crypterCore.text_parser import read_text, text_binary, write_text # Reads and writes text
 
-def file_location(option, *purpose):
+def file_location():
     """This function requests a file location from the user.
 
     The variable option determines whether the text should be converted from binary or not
@@ -42,7 +42,7 @@ def source_menu(option):
 
         if source_type == '1':
             while True:
-                source_location = file_location(option,'s')
+                source_location = file_location()
                 if option == 'e': # To be encrypted
                     source = read_text(source_location, True)
                 elif option == 'd': # To be decrypted
@@ -97,7 +97,8 @@ def dest_menu(source_location):
                 dest = source_location
                 break
         elif dest_type == '2': # Create a new file
-            dest = file_location(None)
+            dest = file_location()
+            break
         elif dest_type == '3': # Print to command line
             dest = None
             break
