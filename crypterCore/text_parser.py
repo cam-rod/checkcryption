@@ -110,7 +110,7 @@ def read_text(content, binary):
 
         return source
     except FileNotFoundError:
-        return FileNotFoundError
+        return None
 
 def write_text(content, destination, binary):
     """This function writes text to the requested destination.

@@ -14,30 +14,17 @@ def file_location(option, *purpose):
     while True:
         print('\nPlease enter the COMPLETE location of your .txt file in one of these formats:')
         try:
-            location = input('C:\\\\Users\\\\Admin\\\\file.txt OR C:/Users/Admin/file.txt:')
+            location = input('C:\\\\Users\\\\Admin\\\\file.txt OR C:/Users/Admin/file.txt: ')
 
-            if not re.search('.txt$', location): # Only .txt files allowed
+            if not re.search(r'\.txt$', location): # Only .txt files allowed
                 print('That is not a .txt file, please try again.')
                 continue
-
-            if purpose == 's': # Get source data
-                if option == 'e': # To be encrypted
-                    source = read_text(location, True)
-                elif option == 'd': # To be decrypted
-                    source = read_text(location, None)
-                
-
-                if source == FileNotFoundError: # Invalid format
-                    print('Entry failed, please use the correct format!')
-                    continue
+            
             break
         except SyntaxError: # Used C:\ instead of C:\\ or C:/
             print('Entry failed, please use the correct format!')
             continue
-    if purpose == 's':
-        return [source, location]
-    else:
-        return location
+    return location
     
 
 def source_menu(option):
@@ -54,7 +41,18 @@ def source_menu(option):
         source_type = input('Press \'1\' to use a file, or \'2\' to directly input the text. ')
 
         if source_type == '1':
-            source, source_location = file_location(option,'s')
+            while True:
+                source_location = file_location(option,'s')
+                if option == 'e': # To be encrypted
+                    source = read_text(source_location, True)
+                elif option == 'd': # To be decrypted
+                    source = read_text(source_location, None)
+
+                if source == None: # Invalid format
+                    print('Entry failed, please use the correct format!')
+                    continue
+                else:
+                    break 
             break
             
         elif source_type == '2':
@@ -158,7 +156,10 @@ def main(E_USER):
         if re.match('e', option.lower()): # encrypt data
             print('\nEncryption menu:')
 
-            source, source_location = source_menu('e') # Get source data
+            source = source_menu('e') # Get source data
+            source_location = source[1]
+            source = source[0]
+
             dest = dest_menu(source_location) # Get destination location
             del source_location
             
