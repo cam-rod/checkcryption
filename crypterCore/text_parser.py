@@ -44,7 +44,8 @@ def text_binary(content, binary):
     """This function converts UTF-8 text to binary or vice versa.
     
     If binary is True, the text will be converted to binary; if False, from binary."""
-    new_content = '' # Converted content
+    new_content = [] # Converted content
+    e_content = [] # Content in encryption form ready to be returned
 
     if binary == None:
         return content
@@ -73,9 +74,19 @@ def text_binary(content, binary):
                 char_list[2] = char_list[2][-6:]
                 char_list[3] = char_list[3][-6:]
             
-            new_content += '2'+''.join(char_list)
+            new_content.append('2'+''.join(char_list))
+        try:
+            for i in range(len(new_content)):
+                e_content.append(new_content[2*i] + new_content[(2*i)+1]) # Combine a pair of characters
+        except IndexError: # Always occurs
+            e_content.append(new_content[-1])
+        finally:
+            if len(new_content) % 2 == 0: # Even number of characters
+                del e_content[-1] # Delete the repeated character
+            else: # Odd number of characters
+                e_content[-1] = e_content[-1] + '9' # Add an indicator to the final character
         
-        return int(new_content) # Return as integer
+        return [int(c) for c in e_content] # Return list indexes as integers
     elif binary == False:
         content = str(content)
         seek = 0 # ID's what has already been extracted

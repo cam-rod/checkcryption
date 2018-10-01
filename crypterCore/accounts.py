@@ -20,11 +20,15 @@ def user_entry():
     data['pass'] = password_entry()
 
     data['user'] = text_binary(data['user'], True)
+    user = data['user'] # Separate storage
+    user = ''.join([str(i) for i in user])
+
     en_user = Crypter(data['pass'], data['user']) # Crypter object to create encrypted username
     en_user.encryption_key = True # Generate encryption key
     data['e_user'] = en_user.encrypter() # Encrypt the username
 
-    del en_user
+    data['user'] = user
+    del en_user, user
     return data # Both usernames and the password
 
 def main():

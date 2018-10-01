@@ -173,18 +173,21 @@ class Crypter:
         key = lambda num: int(self._encryption_key[num]) # Return the numeric value from the key
         text = self.text
 
-        # All equations with multiplication add a value to prevent multiplying by 0
-        text = int(str(text)[:4] + self._encryption_key[7] + str(text)[4:]) # Salting
-        text *= int(self._encryption_key[15] + self._encryption_key[1]) + 3  # ex.: *int('3'+'0') -> *30
-        text += 200 * (key(8) - key(3))
-        text -= 15
-        text -= (key(6) * key(12)) + key(0)
-        text *= (13 * key(13)) + 2
-        text -= key(2) - key(4) - key(5) + key(11)
-        text += key(10) * key(9)
-        text *= (key(14) ** 2) + 1
+        for pair in range(len(text)):
+            # All equations with multiplication add a value to prevent multiplying by 0
+            text[pair] = int(str(text[pair])[:4] + self._encryption_key[7] + str(text[pair])[4:]) # Salting
+            text[pair] *= int(self._encryption_key[15] + self._encryption_key[1]) + 3  # ex.: *int('3'+'0') -> *30
+            text[pair] += 200 * (key(8) - key(3))
+            text[pair] -= 15
+            text[pair] -= (key(6) * key(12)) + key(0)
+            text[pair] *= (13 * key(13)) + 2
+            text[pair] -= key(2) - key(4) - key(5) + key(11)
+            text[pair] += key(10) * key(9)
+            text[pair] *= (key(14) ** 2) + 1
+        
+        text = '/'.join([str(p) for p in text]) # Convert list to string and join
 
-        return str(text) # Return as string for writing to file
+        return text # Return as string for writing to file
 
     def decrypter(self):
         """This decrypts the text."""
