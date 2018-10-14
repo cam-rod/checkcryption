@@ -7,5 +7,12 @@
         "nums",
         "odbp",
         "textcryption"
-    ]
+    ],
+    "python.linting.pylintArgs": [
+        "--disable=E1133",
+        "--disable=W0150",
+        "--disable=C0303",
+        "--disable=C0200",
+        "--disable=C0103"
+    ],
 }

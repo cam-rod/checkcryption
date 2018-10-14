@@ -37,7 +37,8 @@ def main():
     while True:
         print('\nWould you like to create an account or sign in to your account?')
         print('Note: an account is required to encrypt or decrypt data.\n')
-        option = input('Type \'c\' to create an account, \'s\' to sign in, or \'q\' to quit the program: ')
+        option = input('Type \'c\' to create an account, \'s\' to sign in, or \'q\' to quit'
+                       + ' the program: ')
         
         if re.match('c', option.lower()): # Create account
             print('\nCreate your account here.')

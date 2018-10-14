@@ -149,8 +149,8 @@ class Crypter:
                     salt.append(8)
             # Begin salting, all numbers
             salt.append((nums[4] - nums[0] + (nums[7] + (nums[8] - nums[5]))
-                             * nums[1] + ((nums[11] + nums[9] + nums[6]) - (nums[2] + nums[0]) * 5)
-                             - nums[3] + nums[10]) % 10)
+                         * nums[1] + ((nums[11] + nums[9] + nums[6]) - (nums[2] + nums[0]) * 5)
+                         - nums[3] + nums[10]) % 10)
 
             # Salting the encryption key
             nums.insert(2, salt[0])
@@ -175,8 +175,10 @@ class Crypter:
 
         for pair in range(len(text)):
             # All equations with multiplication add a value to prevent multiplying by 0
-            text[pair] = int(str(text[pair])[:4] + self._encryption_key[7] + str(text[pair])[4:]) # Salting
-            text[pair] *= int(self._encryption_key[15] + self._encryption_key[1]) + 3  # ex.: *int('3'+'0') -> *30
+            text[pair] = int(str(text[pair])[:4] + self._encryption_key[7]
+                             + str(text[pair])[4:]) # Salting
+            text[pair] *= int(self._encryption_key[15]
+                              + self._encryption_key[1]) + 3  # ex.: *int('3'+'0') -> *30
             text[pair] += 200 * (key(8) - key(3))
             text[pair] -= 15
             text[pair] -= (key(6) * key(12)) + key(0)
@@ -205,8 +207,8 @@ class Crypter:
             text[pair] += 15
             text[pair] -= 200 * (key(8) - key(3))
             text[pair] = text[pair] / (int(self._encryption_key[15] + self._encryption_key[1]) + 3)
-            text[pair] = re.sub(' ', '', '{:1000f}'.format(text[pair])) # Properly convert to string
+            text[pair] = re.sub(' ', '', '{:1000f}'.format(text[pair])) # Fully convert to string
             text[pair] = text[pair][:4] + text[pair][5:] # Remove salted character, leave as str
-            text[pair] = text[pair][0:re.search(r'\.', text[pair]).start()] # Remove any decimal points
+            text[pair] = text[pair][0:re.search(r'\.', text[pair]).start()] # Remove decimal points
         
         return text

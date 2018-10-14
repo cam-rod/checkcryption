@@ -33,7 +33,8 @@ def password_entry():
                           'Reason: password did not meet minimum requirements.')
                     continue
             else:
-                print('\nThat is not a valid password. Reason: invalid characters used in password.')
+                print('\nThat is not a valid password. Reason: invalid characters used in'
+                      + ' password.')
                 continue
         else:
             print('\nThat is not a valid password. Reason: password was not 12 characters long.')
@@ -42,20 +43,20 @@ def password_entry():
 
 def text_binary(content, binary):
     """This function converts UTF-8 text to binary or vice versa.
-    
-    If binary is True, the text will be converted to binary; if False, from binary; if write, nothing occurs; if None,
-    the text is split."""
+
+    If binary is True, the text will be converted to binary; if False, from binary; if write,
+    nothing occurs; if None, the text is split."""
     new_content = [] # Converted content
     e_content = [] # Content in encryption form ready to be returned
 
     if binary == 'write':
         return content
-    if binary == None:
+    elif binary is None:
         new_content = content.split('/')
         return [int(p) for p in new_content]
     elif binary:
         for char in content:
-            char_array = '/'.join(map(bin,bytearray(char, 'utf8'))).split('/') # Extract all bytes
+            char_array = '/'.join(map(bin, bytearray(char, 'utf8'))).split('/') # Extract all bytes
             
             char_list = [] # Formatted text for appending
             for byte in char_array:
@@ -81,7 +82,7 @@ def text_binary(content, binary):
             new_content.append('2'+''.join(char_list))
         try:
             for i in range(len(new_content)):
-                e_content.append(new_content[2*i] + new_content[(2*i)+1]) # Combine a pair of characters
+                e_content.append(new_content[2*i] + new_content[(2*i)+1]) # Combine a pair of chars
         except IndexError: # Always occurs
             e_content.append(new_content[-1])
         finally:
@@ -89,16 +90,16 @@ def text_binary(content, binary):
                 del e_content[-1] # Delete the repeated character
         
         return [int(c) for c in e_content] # Return list indexes as integers
-    elif binary == False:
+    elif binary is False:
         content = [str(i) for i in content]
         new_content = ''
-        twofind = lambda c: re.search('2', content[c][seek+1:]) # Return the location of next 2 in content
+        twofind = lambda c: re.search('2', content[c][seek+1:]) # Return location of 2 in content
 
         for c in range(len(content)): # Character pairs
             seek = 0 # ID's what has already been extracted
             while True: # Individual characters in pair
                 try:
-                    char = content[c][seek+1:twofind(c).start()+1] # From after the 2 to before the next one
+                    char = content[c][seek+1:twofind(c).start()+1] # From after 2 to before next 2
                 except AttributeError: # For second character (or last in whole text)
                     char = content[c][seek+1:]
                 finally:
@@ -134,7 +135,7 @@ def write_text(content, destination, binary):
     
     content = text_binary(content, binary) # Convert from binary if requested
 
-    if destination == None: # Command line output
+    if destination is None: # Command line output
         print('')
         print(content)
     else:
@@ -160,8 +161,8 @@ def read_users(username):
             try:
                 # From 1 char after user (semicolon) to the following semicolon
                 saved_data['e_user'] = file_text[(located_data.end())+1:
-                                                 (re.search(';', file_text[located_data.end()+1:]).start())
-                                                 +located_data.end()+1]
+                                                 (re.search(';', file_text[located_data.end()+1:])
+                                                  .start())+located_data.end()+1]
                 break
             except TypeError:
                 saved_data['user'] = None

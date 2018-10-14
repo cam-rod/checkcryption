@@ -48,7 +48,7 @@ def source_menu(option):
                 elif option == 'd': # To be decrypted
                     source = read_text(source_location, None)
 
-                if source == None: # Invalid format
+                if source is None: # Invalid format
                     print('Entry failed, please use the correct format!')
                     continue
                 else:
@@ -58,7 +58,7 @@ def source_menu(option):
         elif source_type == '2':
             while True:  # Type source data
                 print('\nPlease enter your text here. To start a new line, use \\n in the line.')
-                print('This field support all uppercase and lowercase letters, numbers, forward slash (/),')
+                print('This field supports all letters, numbers, forward slash (/),')
                 print('and \\n specifically (no other symbols allowed).\n')
                 try:
                     source = input()
@@ -91,7 +91,7 @@ def dest_menu(source_location):
         dest_type = input('or \'3\' to directly output to the command line. ')
 
         if dest_type == '1': # Overwrite file
-            if source_location == None:
+            if source_location is None:
                 print('You did not provide a source file, please choose another option.')
                 continue
             else:
@@ -109,7 +109,7 @@ def dest_menu(source_location):
     return dest
 
 def verify_menu(source, dest, E_USER, process):
-    """This menu verifies that the user is who they say they are, and then runs the encryption/decryption."""
+    """This menu verifies the user, and then runs the encryption/decryption."""
 
     for attempt in range(6): # 3 password attempts, arbitrary number used
         attempt += 1
@@ -127,14 +127,14 @@ def verify_menu(source, dest, E_USER, process):
             if process == 'e': # Encrypt
                 print('Encrypting text...')
                 write_text(processing.encrypter(), dest, 'write')
-                if dest == None:
+                if dest is None:
                     print('Done!')
                 else:
                     print('Done! Check {} to see your encrypted file.'.format(dest))
             else: # Decrypt
                 print('Decrypting text...')
                 write_text(processing.decrypter(), dest, False)
-                if dest == None:
+                if dest is None:
                     print('Done!')
                 else:
                     print('Done! Check {} to see your decrypted file.'.format(dest))
@@ -149,7 +149,7 @@ def main(E_USER):
     E_USER: the encrypted username, used for verification."""
 
     while True: # The 'crypter' loop
-        if E_USER == None: # User opted to quit from signin menu
+        if E_USER is None: # User opted to quit from signin menu
             break
 
         print('\nWhat would you like to do?')
