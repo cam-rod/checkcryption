@@ -1,4 +1,4 @@
-"""This module hosts the menus for the textcryption.py main program."""
+"""This module hosts the menus for the checkcryption.py main program."""
 
 import re
 from crypterCore import accounts
