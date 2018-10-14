@@ -1,6 +1,5 @@
 # dev files
-.vscode/settings.json
-.vscode/current-setup.code-workspace
+.vscode/
 **/__pycache__
 # usernames
 **/users.txt
