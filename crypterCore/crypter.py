@@ -191,24 +191,3 @@ class Crypter:
         new_text = '/'.join(text)
 
         return new_text # Return as string for writing to file
-
-    def decrypter(self):
-        """This decrypts the text."""
-        key = lambda num: int(self._encryption_key[num]) # Return the numeric value from the key
-        text = self.text
-
-        # Begin decryption
-        for pair in range(len(text)):
-            text[pair] = text[pair] / ((key(14) ** 2) + 1)
-            text[pair] -= key(10) * key(9)
-            text[pair] += key(2) - key(4) - key(5) + key(11)
-            text[pair] = text[pair] / ((13 * key(13)) + 2)
-            text[pair] += (key(6) * key(12)) + key(0)
-            text[pair] += 15
-            text[pair] -= 200 * (key(8) - key(3))
-            text[pair] = text[pair] / (int(self._encryption_key[15] + self._encryption_key[1]) + 3)
-            text[pair] = re.sub(' ', '', '{:1000f}'.format(text[pair])) # Fully convert to string
-            text[pair] = text[pair][:4] + text[pair][5:] # Remove salted character, leave as str
-            text[pair] = text[pair][0:re.search(r'\.', text[pair]).start()] # Remove decimal points
-        
-        return text

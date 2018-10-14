@@ -7,7 +7,7 @@ from crypterCore import menus # Program menus
 
 print("Welcome to Checkcryption, the program that helps you verify your data!")
 
-E_USER = accounts.main() # Signs in user
+E_USER = accounts.main(True) # Signs in user
 
 if E_USER is None: # User opted to quit
     pass
