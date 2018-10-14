@@ -41,20 +41,17 @@ def password_entry():
             continue
     return password
 
-def text_binary(content, binary):
+def data_binary(content, binary):
     """This function converts UTF-8 text to binary or vice versa.
 
-    If binary is True, the text will be converted to binary; if False, from binary; if write,
-    nothing occurs; if None, the text is split."""
+    If binary is True, the text will be converted to binary; if False, from binary;
+    if None, nothing happens."""
     new_content = [] # Converted content
     e_content = [] # Content in encryption form ready to be returned
 
-    if binary == 'write':
+    if binary is None:
         return content
-    elif binary is None:
-        new_content = content.split('/')
-        return [int(p) for p in new_content]
-    elif binary:
+    else:
         for char in content:
             char_array = '/'.join(map(bin, bytearray(char, 'utf8'))).split('/') # Extract all bytes
             
@@ -92,50 +89,23 @@ def text_binary(content, binary):
                 del e_content[-1] # Delete the repeated character
         
         return [int(c) for c in e_content] # Return list indexes as integers
-    elif binary is False:
-        content = [str(i) for i in content]
-        new_content = ''
-        twofind = lambda c: re.search('2', content[c][seek+1:]) # Return location of 2 in content
 
-        for c in range(len(content)): # Character pairs
-            seek = 0 # ID's what has already been extracted
-            while True: # Individual characters in pair
-                try:
-                    char = content[c][seek+1:twofind(c).start()+1] # From after 2 to before next 2
-                except AttributeError: # For second character (or last in whole text)
-                    char = content[c][seek+1:]
-                finally:
-                    char = chr(int(char, 2)) # Convert to utf-8
-                    new_content += char
-                    try:
-                        seek += twofind(c).start()+1
-                        if seek == 0: # Loop completed
-                            break
-                    except AttributeError: # Loop completed by NoneType
-                        break
-
-        return new_content # For saving
-
-def read_text(content, binary):
+def read_data(content, binary):
     """This function reads the content of a text file or direct entry.
 
     If requested, the text is then converted to binary before being returned."""
 
     try:
-        with open(content) as file:
+        with open(content, 'rb') as file:
             source = file.read()
-        source = text_binary(source, binary) # Convert to binary if requested
+        source = data_binary(source, binary) # Convert to binary if requested
 
         return source
     except FileNotFoundError:
         return None
 
-def write_text(content, destination, binary):
-    """This function writes text to the requested destination.
-    
-    If requested, the text is then converted from binary before being written."""
-    
-    content = text_binary(content, binary) # Convert from binary if requested
+def write_data(content, destination):
+    """This function writes text to the requested destination."""
 
     if destination is None: # Command line output
         print('')
