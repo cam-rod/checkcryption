@@ -58,10 +58,11 @@ def source_menu(option):
         elif source_type == '2':
             while True:  # Type source data
                 print('\nPlease enter your text here. To start a new line, use \\n in the line.')
-                print('This field support all uppercase and lowercase letters, numbers, and \\n specifically (no symbols).\n')
+                print('This field support all uppercase and lowercase letters, numbers, forward slash (/),')
+                print('and \\n specifically (no other symbols allowed).\n')
                 try:
                     source = input()
-                    if re.search(r'[^A-Za-z0-9 \n]', source): # invalid character
+                    if re.search(r'[^A-Za-z0-9/ \n]', source): # invalid character
                         print('Entry failed, please use only the allowed characters!')
                         continue
                     else:
@@ -125,7 +126,7 @@ def verify_menu(source, dest, E_USER, process):
 
             if process == 'e': # Encrypt
                 print('Encrypting text...')
-                write_text(processing.encrypter(), dest, None)
+                write_text(processing.encrypter(), dest, 'write')
                 if dest == None:
                     print('Done!')
                 else:

@@ -43,12 +43,16 @@ def password_entry():
 def text_binary(content, binary):
     """This function converts UTF-8 text to binary or vice versa.
     
-    If binary is True, the text will be converted to binary; if False, from binary."""
+    If binary is True, the text will be converted to binary; if False, from binary; if write, nothing occurs; if None,
+    the text is split."""
     new_content = [] # Converted content
     e_content = [] # Content in encryption form ready to be returned
 
-    if binary == None:
+    if binary == 'write':
         return content
+    if binary == None:
+        new_content = content.split('/')
+        return [int(p) for p in new_content]
     elif binary:
         for char in content:
             char_array = '/'.join(map(bin,bytearray(char, 'utf8'))).split('/') # Extract all bytes
@@ -83,29 +87,29 @@ def text_binary(content, binary):
         finally:
             if len(new_content) % 2 == 0: # Even number of characters
                 del e_content[-1] # Delete the repeated character
-            else: # Odd number of characters
-                e_content[-1] = e_content[-1] + '9' # Add an indicator to the final character
         
         return [int(c) for c in e_content] # Return list indexes as integers
     elif binary == False:
-        content = str(content)
-        seek = 0 # ID's what has already been extracted
-        twofind = re.search('2', content[seek+1:]) # Return the location of next 2 in content
+        content = [str(i) for i in content]
+        new_content = ''
+        twofind = lambda c: re.search('2', content[c][seek+1:]) # Return the location of next 2 in content
 
-        while True:
-            try:
-                char = content[seek+1:twofind.start()] # From after the 2 to before the next one
-            except AttributeError: # For last character
-                char = content[seek+1:]
-            finally:
-                char = chr(int(char, 2)) # Convert to utf-8
-                new_content += char
+        for c in range(len(content)): # Character pairs
+            seek = 0 # ID's what has already been extracted
+            while True: # Individual characters in pair
                 try:
-                    seek = twofind.start()
-                    if seek == 0: # Loop completed
+                    char = content[c][seek+1:twofind(c).start()+1] # From after the 2 to before the next one
+                except AttributeError: # For second character (or last in whole text)
+                    char = content[c][seek+1:]
+                finally:
+                    char = chr(int(char, 2)) # Convert to utf-8
+                    new_content += char
+                    try:
+                        seek += twofind(c).start()+1
+                        if seek == 0: # Loop completed
+                            break
+                    except AttributeError: # Loop completed by NoneType
                         break
-                except AttributeError: # Loop completed by NoneType
-                    break
 
         return new_content # For saving
 

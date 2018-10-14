@@ -185,27 +185,28 @@ class Crypter:
             text[pair] += key(10) * key(9)
             text[pair] *= (key(14) ** 2) + 1
         
-        text = '/'.join([str(p) for p in text]) # Convert list to string and join
+        text = [str(p) for p in text] # Convert list to string and join
+        new_text = '/'.join(text)
 
-        return text # Return as string for writing to file
+        return new_text # Return as string for writing to file
 
     def decrypter(self):
         """This decrypts the text."""
         key = lambda num: int(self._encryption_key[num]) # Return the numeric value from the key
-        self.text = int(self.text)
         text = self.text
 
         # Begin decryption
-        text = text / ((key(14) ** 2) + 1)
-        text -= key(10) * key(9)
-        text += key(2) - key(4) - key(5) + key(11)
-        text = text / ((13 * key(13)) + 2)
-        text += (key(6) * key(12)) + key(0)
-        text += 15
-        text -= 200 * (key(8) - key(3))
-        text = text / (int(self._encryption_key[15] + self._encryption_key[1]) + 3)
-        text = re.sub(' ', '', '{:1000f}'.format(text)) # Properly convert to string
-        text = text[:4] + text[5:] # Remove salted character, leave as str
-
-        text = text[0:re.search(r'\.', text).start()] # Remove any decimal points
+        for pair in range(len(text)):
+            text[pair] = text[pair] / ((key(14) ** 2) + 1)
+            text[pair] -= key(10) * key(9)
+            text[pair] += key(2) - key(4) - key(5) + key(11)
+            text[pair] = text[pair] / ((13 * key(13)) + 2)
+            text[pair] += (key(6) * key(12)) + key(0)
+            text[pair] += 15
+            text[pair] -= 200 * (key(8) - key(3))
+            text[pair] = text[pair] / (int(self._encryption_key[15] + self._encryption_key[1]) + 3)
+            text[pair] = re.sub(' ', '', '{:1000f}'.format(text[pair])) # Properly convert to string
+            text[pair] = text[pair][:4] + text[pair][5:] # Remove salted character, leave as str
+            text[pair] = text[pair][0:re.search(r'\.', text[pair]).start()] # Remove any decimal points
+        
         return text
