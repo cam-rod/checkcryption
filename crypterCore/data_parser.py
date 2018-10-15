@@ -53,7 +53,7 @@ def data_binary(content, binary):
         return content
     else:
         for char in content:
-            char_array = '/'.join(map(bin, bytearray(char, 'utf8'))).split('/') # Extract all bytes
+            char_array = '/'.join(map(bin, bytearray(str(char), 'utf8'))).split('/') # Extract bytes
             
             char_list = [] # Formatted text for appending
             for byte in char_array:
@@ -90,15 +90,22 @@ def data_binary(content, binary):
         
         return [int(c) for c in e_content] # Return list indexes as integers
 
-def read_data(content, binary):
+def read_data(content, binary, *verify):
     """This function reads the content of a text file or direct entry.
 
-    If requested, the text is then converted to binary before being returned."""
+    If requested, the text is then converted to binary before being returned.
+    Encrypted files to be verified will be opened in non-binary read mode."""
 
     try:
-        with open(content, 'rb') as file:
-            source = file.read()
-        source = data_binary(source, binary) # Convert to binary if requested
+        try:
+            if verify[0]:
+                with open(content) as file: # Non-binary read mode
+                    source = file.read()
+                source = data_binary(source, binary) # Convert to binary if requested
+        except IndexError:    
+            with open(content, 'rb') as file:
+                source = file.read()
+            source = data_binary(source, binary) # Convert to binary if requested
 
         return source
     except FileNotFoundError:

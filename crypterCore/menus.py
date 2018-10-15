@@ -27,23 +27,23 @@ def source_menu(option):
     source_location = None # so it can be returned if it is not used
 
     if option == 'v':
-        question = 'you would like to be verified'
+        question = 'unencrypted data you would like to be verified'
     elif option == 'e':
-        question = 'you would like to be encrypted'
+        question = 'data you would like to be encrypted'
     else:
-        question = 'that has been encrypted' 
+        question = 'data that has been encrypted' 
 
     while True:
-        print('\nWhere is the data {}?'.format(question))
+        print('\nWhere is the {}?'.format(question))
         source_type = input('Press \'1\' to use a file, or \'2\' to directly input the text. ')
 
         if source_type == '1':
             while True:
                 source_location = file_location()
-                if option == 'e': # To be encrypted
+                if option == 'e' or option == 'v': # To be encrypted
                     source = read_data(source_location, True)
                 else: # To be verified
-                    source = read_data(source_location, None)
+                    source = read_data(source_location, None, True)
 
                 if source is None: # Invalid format
                     print('Entry failed, please use the correct format!')
@@ -65,7 +65,7 @@ def source_menu(option):
                             print('Entry failed, please use only the allowed characters!')
                             continue
                         else:
-                            if option == 'e': # To be encrypted
+                            if option == 'e' or option == 'v': # To be encrypted
                                 source = data_binary(source, True)
                             else:
                                 source = data_binary(source, None)
@@ -74,7 +74,7 @@ def source_menu(option):
                         print('Entry failed, please use only the allowed characters!')
                         continue
                 break
-            except KeyboardInterrupt:
+            except (KeyboardInterrupt, EOFError):
                 continue
         else:
             print('That is not an option, please try again.')
@@ -123,7 +123,7 @@ def verify_menu(source, dest, E_USER, process):
             del source, dest, verify
             break
         print('\nPlease confirm your credentials (attempt {} of 3): '.format(attempt))
-        verify = accounts.main()
+        verify = accounts.main('verify')
         if verify['e_user'] == E_USER: # Retrieved info matches signed in user
             print('Generating encryption key...')
             processing = Crypter(verify['pass'], source)
@@ -171,7 +171,7 @@ def main(E_USER):
 
             continue
         elif re.match('v', option.lower()): # decrypt data
-            print('Verification menu:')
+            print('\nVerification menu:')
 
             source, source_location = source_menu('v') # Get source data
             dest = dest_menu('v') # Get encrypted data

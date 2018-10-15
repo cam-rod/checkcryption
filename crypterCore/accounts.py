@@ -18,8 +18,11 @@ def main(*choice):
     data = {'user': None, 'pass': None, 'e_user': None} # e_user is the encrypted username
 
     try:
-        if choice == 'setup': # Beginning of program
-            print('Sign in or create your Checkcryption account.')
+        try:
+            if choice[0] == 'setup': # Beginning of program
+                print('Sign in or create your Checkcryption account.')
+        except IndexError:
+            pass
         data['user'] = input('\nPlease enter a username (to quit, press Ctrl+Z and hit Enter): ')
         data['pass'] = password_entry()
 
@@ -34,9 +37,12 @@ def main(*choice):
         data['user'] = user
         del en_user, user
 
-        if choice == 'verify':
-            return data
-        else:
+        try:
+            if choice[0] == 'verify':
+                return data
+            else:
+                return data['e_user'] # Encrypted username
+        except IndexError:
             return data['e_user'] # Encrypted username
-    except KeyboardInterrupt:
+    except (KeyboardInterrupt, EOFError):
         return
