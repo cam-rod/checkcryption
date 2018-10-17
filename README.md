@@ -40,9 +40,10 @@ python checkcryption.py
 
 ## Screenshots
 
-***Encryption***
+***Encryption***  
 ![Encryption flow](https://i.imgur.com/XL8nLSA.png)
-***Verification***
+
+***Verification***  
 ![Verification flow](https://i.imgur.com/RKTJ2a4.png)
 
 ## Contributing
