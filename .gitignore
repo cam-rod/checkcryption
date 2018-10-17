@@ -3,3 +3,7 @@
 **/__pycache__
 # usernames
 **/users.txt
+# executable files
+dist/
+build/
+checkcryption.spec

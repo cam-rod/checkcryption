@@ -145,6 +145,7 @@ def verify_menu(source, dest, E_USER, process):
                     print('====================================================')
                     print('WARNING: THIS IS NOT THE ORIGINAL FILE! BE CAREFUL!')
                     print('====================================================')
+                    print('You have either used the wrong account or obtained the wrong file.')
             del source, dest, processing, verify
             break
         else:
