@@ -2,6 +2,9 @@
 
 Checkcryption is a command line program that helps you share and verify data.
 
+*This is the development branch for the Checkcryption GUI. It is a work in progress, so some parts will have a GUI,
+while other will not.*
+
 ## How it Works
 
 Checkcryption will encrypt any file using a username and password combination of your choosing. When you want to share the data, send the username and password separately from the actual program and it's encrypted form.
