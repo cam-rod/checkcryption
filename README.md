@@ -3,7 +3,7 @@
 Checkcryption is a command line program that helps you share and verify data.
 
 *This is the development branch for the Checkcryption GUI. It is a work in progress, so some parts will have a GUI,
-while other will not.*
+while others will not.*
 
 ## How it Works
 
