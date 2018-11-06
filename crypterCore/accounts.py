@@ -8,6 +8,7 @@ Functions:
         - signs in using data from users.txt.
     - requests and returns the entered username, encrypted username, and password."""
 
+from checkcryption.checkcryption import Outline # GUI
 from crypterCore.data_parser import password_entry, data_binary
 from crypterCore.crypter import Crypter
 
