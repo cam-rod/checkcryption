@@ -9,6 +9,76 @@ Functions:
     - Writes usernames to users.txt."""
 
 import re
+from checkcryption.checkcryption import Outline
+
+class SignIn(Outline):
+    """This class requests and returns the username and password to be used."""
+    def __init__(self, master, width, height, choice='Sign in or create'):
+        """This generates the outline and starts the windows of account handling."""
+        super().__init__(master, width, height)
+        self.windows(choice, master)
+
+    def windows(self, choice, master):
+        """This generates the GUI and returns the username and password."""
+        tk = self.tk
+        # Description
+        tk.Label(text='{} your Checkcryption account.\n\nPassword requirements:'.format(choice) +
+                 '\n  - Valid character are numbers, letters, and symbols ()[]!@#,.*/' +
+                 '\n  - The password must be EXACTLY 12 characters long' +
+                 '\n  - The password must include at least one lowercase letter, one uppercase ' +
+                 'letter one number, and one symbol', justify='left',
+                 anchor='w', font='{Arial 20}', wraplength=500).grid(column=0, row=0)
+        
+        # Text box labels
+        username = tk.Label(text='Username:', font='{Consolas 20}', justify='left', anchor='w'
+                            ).grid(column=0, row=1)
+        password = tk.Label(text='Password:', font='{Consolas 20}', justify='left', anchor='w'
+                            ).grid(column=0, row=2)
+
+        # Input boxes
+        tk.Entry(width=40, bg='#C0C2C3').grid(column=1, row=1, sticky='w')
+        tk.Entry(width=40, show='•', bg='#C0C2C3').grid(column=1, row=2, sticky='w')
+
+        # Buttons
+        tk.Button(text='Submit', justify='center', anchor='center', width=6,
+                  command=self.interpret(username, password, master)
+                  ).grid(column=0, row=3)
+        tk.Button(text='Quit Program', justify='center', anchor='center', width=12,
+                  command=master.destroy).grid(column=0, row=3)
+
+        return None
+    
+    def interpret(self, username, password, master):
+        """This function interprets the pressed button and verifies the password validity."""
+        userpass = [] # Returns username and password if valid
+        reason = 'This is not a valid password.\n\n' # Reason for error message
+
+        # Verify password
+        if len(password) == 12:
+            if re.search(r'^[A-Za-z\d()[\]!@#,.*/]*$', password): # only valid characters used
+                if (re.search(r'[A-Z]', password)
+                        and re.search(r'[a-z]', password)
+                        and re.search(r'[0-9]', password)
+                        and re.search(r'[()[\]!@#,.*/]', password)):
+                    userpass = {'user': username, 'pass': password}
+                    reason = None
+                else:
+                    reason += 'Reason: password did not meet minimum requirements.'
+            else:
+                reason += 'Reason: invalid characters used in password.'
+        else:
+            reason += 'Reason: password was not 12 characters long.'
+        
+        # Genereate window or quit
+        if reason is None:
+            master.destroy()
+            return userpass
+        else:
+            error = self.tk.Toplevel()
+            error.Label(text=reason).grid(column=0, row=0)
+            error.after(3700, self.destroy)
+            
+            error.mainloop()
 
 def password_entry():
     """This function is called to validate and return a user's password."""

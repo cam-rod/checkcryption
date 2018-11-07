@@ -8,24 +8,23 @@ Functions:
         - signs in using data from users.txt.
     - requests and returns the entered username, encrypted username, and password."""
 
-from checkcryption.checkcryption import Outline # GUI
-from crypterCore.data_parser import password_entry, data_binary
-from crypterCore.crypter import Crypter
+import tkinter as tk
 
 def main(*choice):
     """This function requests a username and password and returns the encrypted username.
     
     choice (optional): used for introductory message or verification"""
+    from crypterCore.data_parser import SignIn, data_binary
+    from crypterCore.crypter import Crypter
+
     data = {'user': None, 'pass': None, 'e_user': None} # e_user is the encrypted username
 
     try:
         try:
             if choice[0] == 'setup': # Beginning of program
-                print('Sign in or create your Checkcryption account.')
+                data = SignIn(tk.Tk(), 800, 1000)
         except IndexError:
-            pass
-        data['user'] = input('\nPlease enter a username (to quit, press Ctrl+Z and hit Enter): ')
-        data['pass'] = password_entry()
+            data = SignIn(tk.Tk(), 800, 1000, choice='Verify')
 
         data['user'] = data_binary(data['user'], True)
         user = data['user'] # Separate storage
