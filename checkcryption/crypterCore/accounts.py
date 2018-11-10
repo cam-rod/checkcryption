@@ -9,14 +9,13 @@ Functions:
     - requests and returns the entered username, encrypted username, and password."""
 
 import tkinter as tk
+from crypterCore.data_parser import SignIn, data_binary
+from crypterCore.crypter import Crypter
 
 def main(*choice):
     """This function requests a username and password and returns the encrypted username.
     
     choice (optional): used for introductory message or verification"""
-    from crypterCore.data_parser import SignIn, data_binary
-    from crypterCore.crypter import Crypter
-
     data = {'user': None, 'pass': None, 'e_user': None} # e_user is the encrypted username
 
     try:
