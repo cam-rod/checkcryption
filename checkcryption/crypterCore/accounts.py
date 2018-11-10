@@ -9,8 +9,8 @@ Functions:
     - requests and returns the entered username, encrypted username, and password."""
 
 import tkinter as tk
-from crypterCore.data_parser import SignIn, data_binary
-from crypterCore.crypter import Crypter
+from .data_parser import SignIn, data_binary
+from .crypter import Crypter
 
 def main(*choice):
     """This function requests a username and password and returns the encrypted username.

@@ -3,8 +3,8 @@
 This module introduces the program and calls other module to carry out specific actions."""
 
 import tkinter as tk # GUI
-from crypterCore import accounts # Account creation or sign in
-from crypterCore import menus # Program menus
+from .crypterCore import accounts # Account creation or sign in
+from .crypterCore import menus # Program menus
 
 # GUI basic frame
 

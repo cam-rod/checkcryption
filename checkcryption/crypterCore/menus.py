@@ -1,8 +1,8 @@
 """This module hosts the menus for the checkcryption.py main program."""
 
 import re
-from crypterCore import accounts
-from crypterCore.crypter import Crypter # encrypts and decrypts files and text
+from . import accounts
+from .crypter import Crypter # encrypts and decrypts files and text
 
 def file_location():
     """This function requests a file location from the user."""
@@ -23,7 +23,7 @@ def source_menu(option):
 
     The variable option alters how the question is posed and how the data is processed."""
 
-    from crypterCore.data_parser import read_data, data_binary # Reads and converts data
+    from .data_parser import read_data, data_binary # Reads and converts data
 
     source_location = None # so it can be returned if it is not used
 
@@ -117,7 +117,7 @@ def dest_menu(option, *source_location):
 def verify_menu(source, dest, E_USER, process):
     """This menu verifies the user, and then runs the encryption/verification."""
 
-    from crypterCore.data_parser import write_data
+    from .data_parser import write_data
 
 
     for attempt in range(6): # 3 password attempts, arbitrary number used
